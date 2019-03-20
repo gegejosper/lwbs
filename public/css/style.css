@@ -1,0 +1,16 @@
+.fa:before {
+    color: #00c0ef;
+}
+.td-actions .fa:before {
+    color: #fff;
+}
+.margin-bottom {
+    margin-bottom:10px !important; 
+}
+.invoice {
+    position: relative;
+    background: #fff;
+    border: 1px solid #f4f4f4;
+    padding: 20px;
+    margin: 10px 25px;
+}
