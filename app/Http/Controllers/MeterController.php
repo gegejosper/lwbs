@@ -20,9 +20,9 @@ class MeterController extends Controller
     }
     public function reading()
     {
-        $dataUsers = Concessionaire::with('user','rate','bill')->paginate(10);
-        //dd($dataUsers);
-        return view('reader.reading',compact('dataUsers'));
+        $data_consumers = Concessionaire::with('user','rate','bill')->paginate(10);
+        //dd($data_consumers);
+        return view('reader.reading',compact('data_consumers'));
     }
     public function report()
     {

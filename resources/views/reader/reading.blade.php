@@ -40,7 +40,12 @@
                                         <td>
                                         {{$Consumer->rate->name}}             
                                         </td>
-                                        
+                                        @php 
+                                        $new_rec = 0;
+                                        if($Consumer->bill != null ){
+                                            $new_rec = $Consumer->bill->newrec;
+                                        }
+                                        @endphp
                                         <td class="td-actions">
                                             <a href="javascript:;" class="edit-modal btn btn-primary btn-flat" 
                                             data-id="{{$Consumer->id}}" 
@@ -50,7 +55,7 @@
                                             data-mincub="{{$Consumer->rate->minimum}}"
                                             data-rate="{{$Consumer->rate->rate}}"
                                             data-excessrate="{{$Consumer->rate->excessrate}}"
-                                            data-prevbill=" {{$Consumer->bill->newrec}}"
+                                            data-prevbill=" {{$new_rec}}"
                                             data-meternum = "{{$Consumer->meternum}}">Add Bill Record</a></td>
                                         
                                     </tr>
