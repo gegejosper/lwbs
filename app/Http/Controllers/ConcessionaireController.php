@@ -257,7 +257,7 @@ class ConcessionaireController extends Controller
          return view('reader.concessionaire', compact('Concessionaire', 'Rate'));
     }
 
-    public function purok_concessionaire($purok)
+    public function view_purok_consumers($purok)
     {
         $data_consumers = Concessionaire::with('bill')->where('purok', '=', $purok)->paginate(10); 
         //dd($data_consumers);

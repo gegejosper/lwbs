@@ -135,7 +135,7 @@ Route::group(['middleware' =>'meterAuth', 'prefix' => 'reader'], function(){
     Route::get('/report', 'MeterController@report')->name('reader.report');
     Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('reader.Concessionaires');
     Route::get('/concessionaires/{id}', 'ConcessionaireController@readerconcessionaire')->name('reader.concessionaire');
-    Route::get('/concessionaires/purok/{purok}', 'ConcessionaireController@purok_concessionaire')->name('reader_purok_concessionaire');
+    Route::get('/concessionaires/purok/{purok}', 'ConcessionaireController@view_purok_consumers')->name('view_purok_consumers');
     Route::post('/concessionaires/recordbill', 'BillController@recordbill')->name('reader.recordbill');
 });
 
