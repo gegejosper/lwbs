@@ -27,7 +27,7 @@
          <a class="navbar-brand" href="http://lowbsystem.com"> <img src="assets/img/water.png" class="img-responsive" style="width:20px;"></a>
        </div>
        <div class="navbar-header">
-         <a class="navbar-brand" href="http://lowbsystem.com">[ Lantungan Water Billing System ]</a>
+         <a class="navbar-brand" href="http://lowbsystem.com">[ Romarate Water Billing System ]</a>
        </div>
        <div class="navbar-collapse collapse navbar-right">
          <ul class="nav navbar-nav">
@@ -43,16 +43,12 @@
    </div>
    @yield('content')
    
-
-   <!-- *****************************************************************************************************************
-    FOOTER
-    ***************************************************************************************************************** -->
     <div id="footerwrap">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4" align="center">
                 <img src="assets/img/water.png" class="img-responsive" style="width:100px;">
-                <h4 style="color:#fff;">Lantungan Water Billing System</h4>
+                <h4 style="color:#fff;">Romarate Water Billing System</h4>
                 </div>
                 <div class="col-lg-4">
                     <h4>Social Links</h4>
@@ -67,9 +63,9 @@
                     <h4>Contact Us</h4>
                     <div class="hline-w"></div>
                     <p>Phone: <strong>000-000-000</strong></p>
-                    <p>Email: <strong>info@lowbs.com</strong></p>
+                    <p>Email: <strong>info@rowbs.com</strong></p>
                     <p>
-                        Lantungan, Aurora<br/>
+                        Romarate, Aurora<br/>
                         Zamboanga Del Sur<br/>
                         Philippines<br/>
                     </p>

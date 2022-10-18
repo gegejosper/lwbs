@@ -19,6 +19,7 @@ class Concessionaire extends Model
     {
         return $this->belongsTO('App\Rate', 'category', 'id');
     }
+    
     public function bill()
     {
         return $this->hasOne('App\Monthlybill', 'meternum', 'meternum')->latest();

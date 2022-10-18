@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-xs-12">
           <h2 class="page-header">
-            LOWBS Report
+            Romarate Water Billing System Payment Report
             <small class="pull-right">Date: <?php echo date('m/d/Y'); ?></small>
           </h2>
         </div>
@@ -24,7 +24,7 @@
             <tr>
               <th>Date</th>
               <th>OR #</th>
-              <th>Concessionaire Name</th>
+              <th>Consumer Name</th>
               <th>Penalty</th>
               <th>Discount</th>
               <th>Amount</th>

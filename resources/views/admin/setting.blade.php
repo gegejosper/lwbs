@@ -4,14 +4,15 @@
  <section class="content">
     <div class="container-fluid">
                     <div class="row">
-                        @include('admin.includes.settingshortcut')
-                        <div class="col-lg-10">
+                        
+                        <div class="col-lg-12">
                             <div class="row">
+                            @include('admin.includes.settingshortcut')
                             @foreach($dataSetting as $Settings)
-                                <div class="col-lg-6">
+                                <div class="col-lg-9">
                                         <div class="box box-info">
                                         <div class="box-header">
-                                            <h3 class="box-title">Penalty / Due Date / Discount</h3>
+                                            <h3 class="box-title">Penalty / Due Date</h3>
                                         </div>
                                         <div class="box-body">
                                             <div class="row">
@@ -52,45 +53,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <div class="box box-danger">
-                                                        <div class="box-header">
-                                                            <h3 class="box-title">Notice</h3>
-                                                        </div>
-                                                        <div class="box-body"> <label for="">Number of Days</label>
-                                                            <div class="input-group input-group-sm">
-                                                            
-                                                                <input type="text" class="form-control" value="{{$Settings->days}}" name="days">
-                                                                <span class="input-group-btn">
-                                                                    <button class="btn btn-info btn-flat" type="submit" id="SaveNotice">Save</button>
-                                                                </span>
-                                                            </div>
-                                                        </div><!-- /.box-body -->
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="box box-danger">
-                                                        <div class="box-header">
-                                                            <h3 class="box-title">Discount</h3>
-                                                        </div>
-                                                        <div class="box-body"> <label for="">Discount Before Due Date</label>
-                                                            <div class="input-group input-group-sm">
-                                                            
-                                                                <input type="text" class="form-control" value="{{$Settings->discount}}" name="discount">
-                                                                <span class="input-group-btn">
-                                                                    <button class="btn btn-info btn-flat" type="submit" id="SaveDiscount">Save</button>
-                                                                </span>
-                                                            </div>
-                                                        </div><!-- /.box-body -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                </div>
-                            @endforeach
-                                <div class="col-lg-6">
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3 class="box-title">Minimum Rate</h3>
@@ -122,36 +84,74 @@
                                         </div><!-- /.box-body -->
                                     </div><!-- /.box -->
                                 </div>
-                                
-                             
                               
-                                <div class="col-lg-6">
-                                    <div class="box box-primary">
-                                            <div class="box-header">
-                                                <h3 class="box-title">Positions</h3>
-                                                <div class="box-tools pull-right">
-                                                <a class="btn btn-info btn-flat btn-sm" href="/admin/position">Modify</a>
-                                                </div>
-                                            </div><!-- /.box-header -->
-                                            <div class="box-body table-responsive no-padding">
-                                                <table class="table table-hover">
-                                                    <tbody><tr>
-                                                        <th>ID</th>
-                                                        <th>Position</th>
-                                                        
-                                                    </tr>
-                                                    @foreach($dataPosition as $Position)
-                                                        <tr class="item{{$Position->id}}">
-                                                        <td>{{$Rate->id}}</td>
-                                                            <td> <a class="name" href="#">{{$Position->name}}</a> </td>
-                                                        </tr>
-                                                    @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- /.box-body -->
-                                        </div><!-- /.box -->
-                                
+                                                <!-- <div class="col-lg-6">
+                                                    <div class="box box-danger">
+                                                        <div class="box-header">
+                                                            <h3 class="box-title">Notice</h3>
+                                                        </div>
+                                                        <div class="box-body"> <label for="">Number of Days</label>
+                                                            <div class="input-group input-group-sm">
+                                                            
+                                                                <input type="text" class="form-control" value="{{$Settings->days}}" name="days">
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-info btn-flat" type="submit" id="SaveNotice">Save</button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                                <!-- <div class="col-lg-6">
+                                                    <div class="box box-danger">
+                                                        <div class="box-header">
+                                                            <h3 class="box-title">Discount</h3>
+                                                        </div>
+                                                        <div class="box-body"> <label for="">Discount Before Due Date</label>
+                                                            <div class="input-group input-group-sm">
+                                                            
+                                                                <input type="text" class="form-control" value="{{$Settings->discount}}" name="discount">
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-info btn-flat" type="submit" id="SaveDiscount">Save</button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                            
+                                            
+                                        </div><!-- /.box-body -->
+                                    </div>
                                 </div>
+                            @endforeach
+                                
+                                <!-- <div class="col-lg-6">
+                                    <div class="box box-primary">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Positions</h3>
+                                            <div class="box-tools pull-right">
+                                            <a class="btn btn-info btn-flat btn-sm" href="/admin/position">Modify</a>
+                                            </div>
+                                        </div>
+                                        <div class="box-body table-responsive no-padding">
+                                            <table class="table table-hover">
+                                                <tbody><tr>
+                                                    <th>ID</th>
+                                                    <th>Position</th>
+                                                    
+                                                </tr>
+                                                @foreach($dataPosition as $Position)
+                                                    <tr class="item{{$Position->id}}">
+                                                    <td>{{$Position->id}}</td>
+                                                        <td> <a class="name" href="#">{{$Position->name}}</a> </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                
+                                </div> -->
                             </div>
                         </div>
                        

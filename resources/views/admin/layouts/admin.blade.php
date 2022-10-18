@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>LOWBS Dashboard</title>
+        <title>Romarate Water Billing System</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
@@ -35,7 +35,7 @@
         <header class="header">
             <a href="/admin/dashboard" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                LOWBS Dashboard
+                RWBS Dashboard
             </a>
             <!-- Header Navbar: style can be found in header.less -->
 
@@ -58,7 +58,7 @@
                     </div>
                     <!-- search form -->
                     <form action="/admin/search" method="get">
-                                                {{ csrf_field() }} 
+                    @csrf
                         <div class="input-group">
                             <input type="text" name="q" class="form-control" placeholder="Search..."/>
                             <span class="input-group-btn">

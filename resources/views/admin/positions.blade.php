@@ -4,9 +4,9 @@
  <section class="content">
     <div class="container-fluid">
                     <div class="row">
-                        @include('admin.includes.settingshortcut')
-                        <div class="col-lg-10">
+                        <div class="col-lg-12">
                             <div class="row">
+                            @include('admin.includes.settingshortcut')
                                 <div class="col-lg-3">
                                     <div class="box box-primary">
                                         <div class="box-header">

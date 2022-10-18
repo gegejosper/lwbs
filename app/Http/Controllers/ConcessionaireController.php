@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Input;
 class ConcessionaireController extends Controller
 {
     //
-    public function addConcessionaire(Request $request)
+    public function addconsumer(Request $request)
     {
         $rules = array(
                 'fname' => 'required',
@@ -25,34 +25,35 @@ class ConcessionaireController extends Controller
                 'mname' => 'required',
                 'categories' => 'required',
                 'meternum' => 'required|unique:users',
-                'clark' => 'required',
-                'password' => 'required|string|min:6',
-                'email' => 'required|string|email|max:255|unique:users'
+                //'clark' => 'required',
         );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return Response::json(array(
                     'errors' => $validator->getMessageBag()->toArray(),
             ));
         } else {
-            $data = new User();
-            $data->fname = $request->fname;
-            $data->mname = $request->mname;
-            $data->lname = $request->lname;
-            $data->meternum = $request->meternum;
-            $data->email = $request->email;
-            $data->usertype = 'concessionaire';
+            // $data = new User();
+            // $data->fname = $request->fname;
+            // $data->mname = $request->mname;
+            // $data->lname = $request->lname;
+            // $data->meternum = $request->meternum;
+            // $data->email = $request->email;
+            // $data->usertype = 'concessionaire';
 
-            $data->password = bcrypt($request->password);
-            $data->save();
+            // $data->password = bcrypt($request->password);
+            // $data->save();
 
 
             $dataCons = new Concessionaire();
             $dataCons->meternum = $request->meternum;
             $dataCons->category = $request->categories;
-            $dataCons->clark = $request->clark;
+            $dataCons->purok = $request->purok;
+            $dataCons->first_name = $request->fname;
+            $dataCons->middle_name = $request->mname;
+            $dataCons->last_name = $request->lname;
             $dataCons->status = 'connected';
-            $dataCons->userId = $data->id;
+            $dataCons->userId = 'n/a';
             $dataCons->pic = 'pic';
             $dataCons->save();
 
@@ -68,19 +69,17 @@ class ConcessionaireController extends Controller
             $dataBill->monthlyRecordDate = date("Y-m-d H:i:s");
             $dataBill->monthlyBillDate = date("2018-01");
             $dataBill->billAmount = 0;
-            $dataBill->status =1;
+            $dataBill->status ='1';
             $dataBill->meternum = $request->meternum;
             $dataBill->save();
 
-            return response()->json($data);
+            return response()->json($dataCons);
         }
     }
-    public function readConcessionaire(Request $req)
+    public function readconsumer(Request $req)
     {
        
-        $dataUser = User::where('usertype', '=', 'concessionaire')
-                    ->with('concessionaire')
-                    ->paginate(50);
+        $dataUser = Concessionaire::with('rate')->paginate(50);
                     
         $dataRate = Rate::all();
 
@@ -176,7 +175,7 @@ class ConcessionaireController extends Controller
         return view('admin.concessionaires',compact('dataUser', 'dataRate'));
     }
     
-    public function editConcessionaire(Request $request)
+    public function editconsumer(Request $request)
     {
         // $data = User::find($request->id);
         // $data->fname = $request->fname;
@@ -187,17 +186,14 @@ class ConcessionaireController extends Controller
         // $data->email = $request->email;
         // $data->password = bcrypt($request->password);
         // $data->save();
-
-        $updateConcessionaire = User::where('id', '=', $request->id)
-                    ->update(['fname' => $request->fname,
-                    'mname' =>$request->mname,
-                    'lname' =>$request->lname,
-                    'usertype' => 'concessionaire',
-                    'email' => $request->email,
-                    'password' => bcrypt($request->password)
-                    ]);
-
-
+        //dd($request);
+        $updateConcessionaire = Concessionaire::where('id', '=', $request->id)
+            ->update(['first_name' => $request->fname,
+            'middle_name' =>$request->mname,
+            'last_name' =>$request->lname,
+            'category' =>$request->categories,
+            'purok' =>$request->purok,
+            ]);
         return response()->json($updateConcessionaire);
     }
 
@@ -219,14 +215,13 @@ class ConcessionaireController extends Controller
                     ]);
         return redirect('/admin/concessionaire/'.$getCon->userId);
     }
-    public function deleteConcessionaire(Request $req)
+    public function deleteconsumer(Request $req)
     {
-        User::find($req->id)->delete();
-        Concessionaire::where('userId', '=', $req->id)->delete();
-
+        //User::find($req->id)->delete();
+        Concessionaire::where('id', $req->id)->delete();
         return response()->json();
     }
-    public function concessionaire($id)
+    public function consumer($id)
     {
         $Concessionaire = User::find($id);
         $paymentHistory = Bill::where('consumerId','=',$id)->get();
@@ -247,7 +242,7 @@ class ConcessionaireController extends Controller
         // $dataUser = Concessionaire::where('usertype', '=', 'concessionaire')
         //             ->with('user')
         //             ->get();
-        $dataUsers = Concessionaire::with('user','rate','bill')
+        $dataUsers = Concessionaire::with('rate','bill')
                                     ->paginate(10);
         //dd($dataUser);
         return view('reader.concessionaires',compact('dataUsers'));
@@ -262,37 +257,34 @@ class ConcessionaireController extends Controller
          return view('reader.concessionaire', compact('Concessionaire', 'Rate'));
     }
 
-    public function clarkconcessionaire($clark)
+    public function purok_concessionaire($purok)
     {
-        $dataUsers = Concessionaire::with('user')->where('clark', '=', $clark)->paginate(10); 
-       
-        //dd($Rate);
-        return view('reader.reading',compact('dataUsers'));
+        $data_consumers = Concessionaire::with('bill')->where('purok', '=', $purok)->paginate(10); 
+        //dd($data_consumers);
+        return view('reader.reading',compact('data_consumers'));
     }
 
-/// Cashier Controller ///
-    public function cashierConcessionaires(Request $req)
+/// Collector Controller ///
+    public function cashier_consumers(Request $req)
     {
-        $dataUsers = Concessionaire::with('user','rate','cashierbill')
+        $consumers = Concessionaire::with('rate','cashierbill')
                                     ->get();
-        //dd($dataUsers);    
-        
-        
-        return view('cashier.concessionaires',compact('dataUsers'));
+        return view('collector.consumers',compact('consumers'));
         
     }
-    public function cashierconcessionaire($id)
+    public function cashier_consumer($id)
     {
         
-        $Concessionaire = User::find($id);
+        $Concessionaire = Concessionaire::with('rate')->find($id);
+        //dd($Concessionaire);
         $paymentHistory = Bill::where('consumerId','=',$id)->get();
         $billHistory = Monthlybill::where('meternum','=',$Concessionaire->meternum)->get();
-        //dd($billHistory);
+       
         
         $Account = Concessionaire::where('meternum', '=', $Concessionaire->meternum)->first(); 
         $Rate = Rate::find($Account->category);
         //dd($Account);
-         return view('cashier.concessionaire', compact('Concessionaire', 'Rate', 'billHistory', 'Account', 'paymentHistory'));
+         return view('collector.consumer', compact('Concessionaire', 'Rate', 'billHistory', 'Account', 'paymentHistory'));
         
         
         // $billHistory = Bill::where('consumerId','=',$id)->get();

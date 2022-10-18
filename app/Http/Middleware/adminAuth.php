@@ -22,10 +22,11 @@ class adminAuth
                 return $next($request);
             }
             else {
-                return back();
-                //return redirect('home');
+                //return back();
+                return redirect('/');
             }
         }
-        return back();
+        return redirect('/');
+        //return back();
     }
 }

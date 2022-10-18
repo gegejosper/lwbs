@@ -20,7 +20,7 @@ class EmployeeController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'position' => 'required'
         );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return Response::json(array(
                     'errors' => $validator->getMessageBag()->toArray(),

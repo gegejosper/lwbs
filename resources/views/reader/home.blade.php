@@ -15,20 +15,16 @@
                                     
                                 <div class="panel panel-default">
                         <div class="panel-heading">
-                        Concessionaires By Clarck
+                        Concessionaires By Purok
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body text-left">
-                                        <a href="concessionaires/clark/Quarry" type="button" class="btn btn-info btn-lg">Quarry</a>
-                                        <a href="concessionaires/clark/Makabibihag"  type="button" class="btn btn-info btn-lg">Makabibihag</a>
-                                        <a href="concessionaires/clark/Palo" type="button" class="btn btn-info btn-lg">Palo</a>
-                                        <a href="concessionaires/clark/Tinago" type="button" class="btn btn-info btn-lg">Tinago</a>
-                                        <a href="concessionaires/clark/KM31" type="button" class="btn btn-info btn-lg">KM31</a>
-                                        <a href="concessionaires/clark/Ambongan" type="button" class="btn btn-info btn-lg">Ambongan</a>
-                                        <a href="concessionaires/clark/Masahan" type="button" class="btn btn-info btn-lg">Masahan</a>
-                                        <a href="concessionaires/clark/Malipayon" type="button" class="btn btn-info btn-lg">Malipayon</a>
-                                        <a href="concessionaires/clark/Kalubian" type="button" class="btn btn-info btn-lg">Kalubian</a>
-                            <!-- /.table-responsive -->
+                            <a href="concessionaires/purok/Lumboy" type="button" class="btn btn-info btn-lg">Lumboy</a>
+                            <a href="concessionaires/purok/San Antonio"  type="button" class="btn btn-info btn-lg">San Antonio</a>
+                            <a href="concessionaires/purok/Mangga" type="button" class="btn btn-info btn-lg">Mangga</a>
+                            <a href="concessionaires/purok/Madasigon" type="button" class="btn btn-info btn-lg">Madasigon</a>
+                            <a href="concessionaires/purok/Maharlika" type="button" class="btn btn-info btn-lg">Maharlika</a>
+                            <a href="concessionaires/purok/Masanayon" type="button" class="btn btn-info btn-lg">Masanayon</a>
                         </div>
                         <!-- /.panel-body -->
                     </div>

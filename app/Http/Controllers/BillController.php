@@ -7,6 +7,7 @@ use Validator;
 use Response;
 use App\Setting;
 use App\Monthlybill;
+use Auth;
 use Illuminate\Support\Facades\Input;
 
 class BillController extends Controller
@@ -14,14 +15,13 @@ class BillController extends Controller
     public function recordbill(Request $request)
     {
         $rules = array(
-                
                 'meternum' => 'required',
                 'newrec' => 'required',
                 'prevrec' => 'required',
                 'payment' => 'required',
                 'cubic' =>'required'
         );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return Response::json(array(
                     'errors' => $validator->getMessageBag()->toArray(),
@@ -35,8 +35,7 @@ class BillController extends Controller
             $dataMonth = Monthlybill::where('meternum', '=', $request->meternum)
                         ->where('monthlyBillDate', '=', date("Y-m"))
                         ->first();
-            $resultMonth = count($dataMonth);
-            if($resultMonth != 0 ){
+            if($dataMonth){
                 $data =  Monthlybill::find($dataMonth->id);
                 $data->cubicCount = $request->cubic;
                 $data->prevrec = $request->prevrec;
@@ -45,7 +44,7 @@ class BillController extends Controller
                 $data->monthlyRecordDate = date("Y-m-d H:i:s");
                 $data->monthlyBillDate = $request->billdate;
                 $data->billAmount = $request->payment;
-                $data->status =0;
+                $data->status ='unpaid';
                 $data->meternum = $request->meternum;
                 $data->save();
                 return response()->json($data);
@@ -59,12 +58,12 @@ class BillController extends Controller
                 $data->monthlyRecordDate = date("Y-m-d H:i:s");
                 $data->monthlyBillDate = $request->billdate;
                 $data->billAmount = $request->payment;
-                $data->status =0;
+                $data->status ='unpaid';
                 $data->meternum = $request->meternum;
                 $data->save();
+
                 return response()->json($data);
             }
-           
         }
     }
 }

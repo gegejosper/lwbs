@@ -11,30 +11,34 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// Route::get('/hi', function () {
+//     return 'Hi';
+// });
 
 Auth::routes();
-
+Route::get('/', 'AdminController@login')->name('front');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/contact', 'Controller@contact')->name('contact');
 Route::get('/about', 'Controller@about')->name('about');
-Route::get('/admin', 'AdminController@login')->name('admin');
-Route::get('/cashier', 'CashierController@login')->name('cashier');
-Route::get('/reader', 'MeterController@login')->name('reader');
-Route::get('/consumer', 'ConsumerController@login')->name('consumer');
+// Route::get('/admin', 'AdminController@login')->name('admin');
+// Route::get('/cashier', 'CashierController@login')->name('cashier');
+// Route::get('/reader', 'MeterController@login')->name('reader');
+// Route::get('/consumer', 'ConsumerController@login')->name('consumer');
 Route::post('/applysuccess', 'ConsumerController@registerconcessionaire')->name('registerconcessionaire');
 Route::post('/error', 'ConsumerController@error')->name('error');
 Route::get('/apply', 'ConsumerController@apply')->name('apply');
 
-Route::post('/admin/login', 'LoginController@adminLogin')->name('admin.login');
-Route::post('/cashier/login', 'LoginController@cashierLogin')->name('cashier.login');
-Route::post('/reader/login', 'LoginController@readerLogin')->name('reader.login');
-Route::post('/consumer/login', 'LoginController@consumerLogin')->name('consumer.login');
+Route::post('/admin/login', 'LoginController@userLogin')->name('user.login');
+// Route::post('/collector/login', 'LoginController@cashierLogin')->name('cashier.login');
+// Route::post('/reader/login', 'LoginController@readerLogin')->name('reader.login');
+// Route::post('/consumer/login', 'LoginController@consumerLogin')->name('consumer.login');
 
 Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+    Route::get('/insert', 'AdminController@insert')->name('insert');
     Route::get('/collectibles', 'AdminController@collectibles')->name('collectibles');
     Route::get('/payments', 'AdminController@payments')->name('payments');
     Route::get('/employee', 'AdminController@employee')->name('employee');
@@ -74,55 +78,74 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::get('/reminders', 'AdminController@reminders')->name('reminders');
     Route::get('/notifications', 'AdminController@notifications')->name('notifications');
 
-    Route::post('/search', 'ConcessionaireController@searchConcessionaire')->name('searchConcessionaire');
+    Route::post('/search', 'ConcessionaireController@searchConcessionaire')->name('searchConcessionairePost');
     Route::get('/search', 'ConcessionaireController@searchConcessionaire')->name('searchConcessionaire');
-    Route::get('/concessionaire', 'ConcessionaireController@readConcessionaire')->name('concessionaire');
-    Route::get('/concessionaire/connected', 'ConcessionaireController@connectedConcessionaire')->name('connectedConcessionaire');
-    Route::get('/concessionaire/disconnected', 'ConcessionaireController@disconnectedConcessionaire')->name('disconnectedConcessionaire');
-    Route::get('/concessionaire/pending', 'ConcessionaireController@applicantConcessionaire')->name('applicantConcessionaire');
-    Route::get('/concessionaire/{id}', 'ConcessionaireController@concessionaire')->name('singleconcessionaire');
-    Route::get('/concessionaires/clark/{clark}', 'ConcessionaireController@viewClark')->name('singleconcessionaire');
-    Route::post('/concessionaire/addconcessionaire', 'ConcessionaireController@addConcessionaire')->name('addconcessionaire');
-    Route::post('/concessionaire/editconcessionaire', 'ConcessionaireController@editConcessionaire')->name('editconcessionaire');
-    Route::post('/concessionaire/deleteconcessionaire', 'ConcessionaireController@deleteConcessionaire')->name('deleteconcessionaire');
+    Route::get('/consumer', 'ConcessionaireController@readconsumer')->name('consumer');
+    Route::get('/consumer/connected', 'ConcessionaireController@connectedConcessionaire')->name('connectedConcessionaire');
+    Route::get('/consumer/disconnected', 'ConcessionaireController@disconnectedConcessionaire')->name('disconnectedConcessionaire');
+    Route::get('/consumer/pending', 'ConcessionaireController@applicantConcessionaire')->name('applicantConcessionaire');
+    Route::get('/consumer/{id}', 'ConcessionaireController@concessionaire')->name('singleconcessionaire');
+    Route::get('/consumer/purok/{clark}', 'ConcessionaireController@viewClark')->name('viewClark');
+    Route::post('/consumer/addconsumer', 'ConcessionaireController@addconsumer')->name('addconsumer');
+    Route::post('/consumer/editconsumer', 'ConcessionaireController@editconsumer')->name('editconsumer');
+    Route::post('/consumer/deleteconsumer', 'ConcessionaireController@deleteconsumer')->name('deletecconsumer');
 
     Route::get('/disconnect/{meternum}', 'ConcessionaireController@disconnect')->name('disconnect');
     Route::get('/reconnect/{meternum}', 'ConcessionaireController@reconnect')->name('reconnect');
+
+    //Route::get('/dashboard', 'CashierController@index')->name('cashierdashboard');
+    //Route::get('/search', 'CashierController@search')->name('search');
+    //Route::get('/report', 'CashierController@report')->name('cashierreport');
+    //Route::post('/report/generate', 'CashierController@generatereport')->name('cashiergeneratereport');
+    //Route::get('/payment/{id}', 'CashierController@payment')->name('cashierpayment');
+    //Route::get('/success/{id}', 'CashierController@success')->name('cashierpayment_success');
+    //Route::post('/processpayment', 'CashierController@processpayment')->name('processpayment');
+    //Route::get('/payment/pay/{id}/{billId}/{amount}', 'CashierController@addpay')->name('addpay');
+    //Route::get('/payment/removepay/{id}/{billId}/', 'CashierController@removepay')->name('removepay');
+    //Route::get('/concessionaires', 'ConcessionaireController@cashierConcessionaires')->name('cashierConcessionaires');
+    //Route::get('/concessionaires/{id}', 'ConcessionaireController@cashierconcessionaire')->name('cashierconcessionaire_view');
+
+    //Route::get('/dashboard', 'MeterController@index')->name('readerdashboard');
+    Route::get('/reading', 'MeterController@reading')->name('reading');
+    Route::get('/report', 'AdminController@report')->name('readerreport');
+    Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('readerConcessionaires');
+    Route::get('/concessionaires/{id}', 'ConcessionaireController@readerconcessionaire')->name('readerconcessionaire');
+    Route::get('/concessionaires/clark/{clark}', 'ConcessionaireController@clarkconcessionaire')->name('readerclarkconcessionaire');
+    Route::post('/concessionaires/recordbill', 'BillController@recordbill')->name('recordbill');
+
 });
-Route::group(['middleware' =>'cashierAuth', 'prefix' => 'cashier'], function(){
+Route::group(['middleware' =>'cashierAuth', 'prefix' => 'collector'], function(){
 
-    Route::get('/dashboard', 'CashierController@index')->name('dashboard');
-    Route::get('/search', 'CashierController@search')->name('search');
-    Route::get('/report', 'CashierController@report')->name('report');
-    Route::post('/report/generate', 'CashierController@generatereport')->name('generatereport');
-    Route::get('/payment/{id}', 'CashierController@payment')->name('cashierconcessionaire');
-    Route::get('/success/{id}', 'CashierController@success')->name('cashierconcessionaire');
-    Route::post('/processpayment', 'CashierController@processpayment')->name('processpayment');
-    Route::get('/payment/pay/{id}/{billId}/{amount}', 'CashierController@addpay')->name('addpay');
-    Route::get('/payment/removepay/{id}/{billId}/', 'CashierController@removepay')->name('addpay');
-    Route::get('/concessionaires', 'ConcessionaireController@cashierConcessionaires')->name('cashierConcessionaires');
-    Route::get('/concessionaires/{id}', 'ConcessionaireController@cashierconcessionaire')->name('cashierconcessionaire');
-    
-
+    Route::get('/dashboard', 'CollectorController@index')->name('cashierdashboard');
+    Route::get('/search', 'CollectorController@search')->name('search');
+    Route::get('/report', 'CollectorController@report')->name('cashierreport');
+    Route::post('/report/generate', 'CollectorController@generatereport')->name('cashiergeneratereport');
+    Route::get('/payment/{id}', 'CollectorController@payment')->name('cashierpayment');
+    Route::get('/success/{id}', 'CollectorController@success')->name('cashierpayment_success');
+    Route::post('/processpayment', 'CollectorController@processpayment')->name('processpayment');
+    Route::get('/payment/pay/{id}/{billId}/{amount}', 'CollectorController@addpay')->name('addpay');
+    Route::get('/payment/removepay/{id}/{billId}/', 'CollectorController@removepay')->name('removepay');
+    Route::get('/consumers', 'ConcessionaireController@cashier_consumers')->name('cashier_consumers');
+    Route::get('/consumers/{id}', 'ConcessionaireController@cashier_consumer')->name('cashier_consumer');
 });
 Route::group(['middleware' =>'meterAuth', 'prefix' => 'reader'], function(){
 
-    Route::get('/dashboard', 'MeterController@index')->name('dashboard');
+    Route::get('/dashboard', 'MeterController@index')->name('readerdashboard');
     Route::get('/reading', 'MeterController@reading')->name('reading');
-    Route::get('/report', 'MeterController@report')->name('report');
+    Route::get('/report', 'MeterController@report')->name('readerreport');
     Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('readerConcessionaires');
     Route::get('/concessionaires/{id}', 'ConcessionaireController@readerconcessionaire')->name('readerconcessionaire');
-    Route::get('/concessionaires/clark/{clark}', 'ConcessionaireController@clarkconcessionaire')->name('clarkconcessionaire');
-    Route::post('/concessionaires/recordbill', 'BillController@recordbill')->name('readerconcessionaire');
+    Route::get('/concessionaires/purok/{purok}', 'ConcessionaireController@purok_concessionaire')->name('reader_purok_concessionaire');
+    Route::post('/concessionaires/recordbill', 'BillController@recordbill')->name('recordbill');
 });
 
 Route::group(['middleware' =>'consumerAuth', 'prefix' => 'consumer'], function(){
 
-    Route::get('/dashboard', 'ConsumerController@index')->name('dashboard');
-    Route::get('/notification', 'ConsumerController@notifications')->name('notifications');
-    Route::get('/profile', 'ConsumerController@profile')->name('profile');
-    Route::get('/bill/{billid}', 'ConsumerController@bill')->name('bill');
-    Route::get('/payment', 'ConsumerController@payment')->name('payment');
-    Route::get('/calculator', 'ConsumerController@calculator')->name('calculator');
+    Route::get('/dashboard', 'ConsumerController@index')->name('consumerdashboard');
+    Route::get('/notification', 'ConsumerController@notifications')->name('consumernotifications');
+    Route::get('/profile', 'ConsumerController@profile')->name('consumerprofile');
+    Route::get('/bill/{billid}', 'ConsumerController@bill')->name('consumerbill');
+    Route::get('/payment', 'ConsumerController@payment')->name('consumerpayment');
+    Route::get('/calculator', 'ConsumerController@calculator')->name('consumercalculator');
    
 });

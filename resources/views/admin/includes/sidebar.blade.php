@@ -15,18 +15,18 @@
                             </a>
                         </li>
                         <li class="active">
-                            <a href="/admin/concessionaire">
-                                <i class="fa fa-male"></i> <span>Concessionaire</span>
+                            <a href="/admin/consumer">
+                                <i class="fa fa-male"></i> <span>Consumers</span>
                             </a>
                         </li>
-                        <li class="active">
+                        <!-- <li class="active">
                             <a href="/admin/applicants">
                                 <i class="fa fa-th-large"></i> <span>Applicants</span>
                                 <!-- <span class="pull-right-container">
                                 <span class="label label-primary pull-right">4</span>
-                                </span> -->
+                                </span> 
                             </a>
-                        </li>
+                        </li> -->
                         <li class="active">
                             <a href="/admin/setting">
                                 <i class="fa  fa-gears"></i> <span>Setting</span>

@@ -16,7 +16,7 @@ class PositionController extends Controller
         $rules = array(
                 'pos_name' => 'required'
         );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
             return Response::json(array(
                     'errors' => $validator->getMessageBag()->toArray(),
@@ -25,6 +25,8 @@ class PositionController extends Controller
             $data = new Position();
             $data->name = $request->pos_name;
             $data->save();
+
+            
 
             return response()->json($data);
         }

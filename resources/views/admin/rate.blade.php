@@ -4,9 +4,9 @@
  <section class="content">
     <div class="container-fluid">
                     <div class="row">
-                        @include('admin.includes.settingshortcut')
-                        <div class="col-lg-10">
+                        <div class="col-lg-12">
                             <div class="row">
+                            @include('admin.includes.settingshortcut')
                                 <div class="col-lg-3">
                                     <div class="box box-primary">
                                         <div class="box-header">
@@ -17,21 +17,21 @@
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                 <div class="input-group input-group-sm">
-                                                                {{ csrf_field() }}   
-                                                                   <!-- <select name="category" id="categories" class="form-control margin-bottom">
-                                                                   @foreach($dataCategory as $Category)
-                                                                   <option value="{{$Category->id}}">{{$Category->cat_name}}</option>
-                                                                    @endforeach
-                                                                   </select> -->
-                                                                   <input type="text" class="form-control margin-bottom" name="cat_name" placeholder="Category Name">      
-                                                                   <input type="number" class="form-control margin-bottom" name="minimum" placeholder="Minimum Cubic Meter">
-                                                                   <input type="number" class="form-control margin-bottom" name="rate" placeholder="Rate" >
-                                                                   <input type="number" class="form-control margin-bottom" name="erate" placeholder="Excess Rate" >
-                                                                  
-                                                                    <button class="btn btn-info btn-flat" type="submit" id="add">Save</button>
-                                                                   
-                                                              
-                                                           </div>
+                                                        {{ csrf_field() }}   
+                                                            <!-- <select name="category" id="categories" class="form-control margin-bottom">
+                                                            @foreach($dataCategory as $Category)
+                                                            <option value="{{$Category->id}}">{{$Category->cat_name}}</option>
+                                                            @endforeach
+                                                            </select> -->
+                                                            <input type="text" class="form-control margin-bottom" name="cat_name" placeholder="Category Name">      
+                                                            <input type="number" class="form-control margin-bottom" name="minimum" placeholder="Minimum Cubic Meter">
+                                                            <input type="number" class="form-control margin-bottom" name="rate" placeholder="Rate">
+                                                            <input type="number" class="form-control margin-bottom" name="erate" placeholder="Excess Rate" >
+                                                            
+                                                            <button class="btn btn-info btn-flat" type="submit" id="add">Save</button>
+                                                            
+                                                        
+                                                    </div>
                                                 </div>
 
                                             </div>

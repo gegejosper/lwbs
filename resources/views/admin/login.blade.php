@@ -30,15 +30,17 @@
         </style>
     </head>
     <body class="bg-white">
-
+   
     <div class="form-box" id="login-box" align="center">
-        <img src="{{ asset('assets/img/water.png') }}" class="img-responsive" width="150" align="center" style="padding-bottom:50px;">
-            <div class="header">Admin Sign In</div>
-            <form action="{{ route('admin.login') }}" method="post">
+    
+        <!-- <img src="{{ asset('assets/img/hdlogo.png') }}" class="img-responsive" width="150" align="center" style="padding-bottom:50px;"> -->
+            <div class="header" style="font-size:25px;">[ Romarate Water Billing System ] <br /></div>
+            <form action="{{ route('user.login') }}" method="post">
             {{ csrf_field() }}
                 <div class="body bg-gray">
+                    <h3>Sign In</h3>
                     <div class="form-group">  
-                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+                        <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="Username" required autofocus>
                         
                     </div>
                     <div class="form-group">

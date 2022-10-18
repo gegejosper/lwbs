@@ -18,14 +18,16 @@ class cashierAuth
     public function handle($request, Closure $next)
     {
         if(Auth::check()){
-            if(Auth::user()->usertype == 'Cashier' || Auth::user()->usertype == 'cashier' || Auth::user()->usertype == 'CASHIER'){       
+            if(Auth::user()->usertype == 'collector' || Auth::user()->usertype == 'Collector' || Auth::user()->usertype == 'COLLECTOR'){       
                 return $next($request);
             }
             else {
-                return back();
+                //return back();
+                return redirect('/');
                 //return redirect('home');
             }
         }
-        return back();
+        return redirect('/');
+        //return back();
     }
 }

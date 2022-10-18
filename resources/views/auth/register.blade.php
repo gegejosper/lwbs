@@ -64,18 +64,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-group{{ $errors->has('category') ? ' has-error' : '' }}">
-                            <label for="category" class="col-md-4 control-label">Category</label>
-
-                            <div class="col-md-6">
-                               <select name="category" id="category">
-                               @forelse()
-                                <option value="{{$Category->id}}">{{$Category->name}}</option>
-                               @empty
-                               @endforelse
-                               </select>
-                            </div>
-                        </div>
+                        
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
