@@ -12,7 +12,7 @@ use Response;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 
-class ConcessionaireController extends Controller
+class ConcessionaireControllerold extends Controller
 {
     //
     public function addConcessionaire(Request $request)
