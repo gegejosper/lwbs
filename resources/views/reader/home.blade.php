@@ -19,12 +19,12 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body text-left">
-                            <a href="concessionaires/purok/Lumboy" type="button" class="btn btn-info btn-lg">Lumboy</a>
-                            <a href="concessionaires/purok/San Antonio"  type="button" class="btn btn-info btn-lg">San Antonio</a>
-                            <a href="concessionaires/purok/Mangga" type="button" class="btn btn-info btn-lg">Mangga</a>
-                            <a href="concessionaires/purok/Madasigon" type="button" class="btn btn-info btn-lg">Madasigon</a>
-                            <a href="concessionaires/purok/Maharlika" type="button" class="btn btn-info btn-lg">Maharlika</a>
-                            <a href="concessionaires/purok/Masanayon" type="button" class="btn btn-info btn-lg">Masanayon</a>
+                            <a href="/reader/concessionaires/purok/Lumboy" type="button" class="btn btn-info btn-lg">Lumboy</a>
+                            <a href="/reader/concessionaires/purok/San Antonio"  type="button" class="btn btn-info btn-lg">San Antonio</a>
+                            <a href="/reader/concessionaires/purok/Mangga" type="button" class="btn btn-info btn-lg">Mangga</a>
+                            <a href="/reader/concessionaires/purok/Madasigon" type="button" class="btn btn-info btn-lg">Madasigon</a>
+                            <a href="/reader/concessionaires/purok/Maharlika" type="button" class="btn btn-info btn-lg">Maharlika</a>
+                            <a href="/reader/concessionaires/purok/Masanayon" type="button" class="btn btn-info btn-lg">Masanayon</a>
                         </div>
                         <!-- /.panel-body -->
                     </div>
