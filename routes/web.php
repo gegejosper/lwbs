@@ -131,12 +131,12 @@ Route::group(['middleware' =>'cashierAuth', 'prefix' => 'collector'], function()
 Route::group(['middleware' =>'meterAuth', 'prefix' => 'reader'], function(){
 
     Route::get('/dashboard', 'MeterController@index')->name('readerdashboard');
-    Route::get('/reading', 'MeterController@reading')->name('reading');
-    Route::get('/report', 'MeterController@report')->name('readerreport');
-    Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('readerConcessionaires');
-    Route::get('/concessionaires/{id}', 'ConcessionaireController@readerconcessionaire')->name('readerconcessionaire');
+    Route::get('/reading', 'MeterController@reading')->name('reader.reading');
+    Route::get('/report', 'MeterController@report')->name('reader.report');
+    Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('reader.Concessionaires');
+    Route::get('/concessionaires/{id}', 'ConcessionaireController@readerconcessionaire')->name('reader.concessionaire');
     Route::get('/concessionaires/purok/{purok}', 'ConcessionaireController@purok_concessionaire')->name('reader_purok_concessionaire');
-    Route::post('/concessionaires/recordbill', 'BillController@recordbill')->name('recordbill');
+    Route::post('/concessionaires/recordbill', 'BillController@recordbill')->name('reader.recordbill');
 });
 
 Route::group(['middleware' =>'consumerAuth', 'prefix' => 'consumer'], function(){
