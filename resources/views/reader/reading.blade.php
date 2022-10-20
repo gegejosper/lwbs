@@ -9,16 +9,15 @@
                 <div class="col-lg-8">
                     <div class="box box-primary">
                             <div class="box-header">
-                                <h3 class="box-title">Concessionaires List</h3>
+                                <h3 class="box-title">Consumers List</h3>
                             </div><!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover" id="table">
                                     <tbody><tr>
                                         <th>ID</th>
-                                        <th>Meter Number</th>
+                                        
                                         <th>Name</th>
                                         <th>Clark</th>
-                                        <th>Category</th>
                                         
                                         <th>Action</th>
                                     </tr>
@@ -31,14 +30,11 @@
                                     //}
                                     //else {?> -->
                                     <tr class="item{{$Consumer->id}}">
-                                    <td>{{$Consumer->id}}</td>
                                     <td>{{$Consumer->meternum}}</td>
-                                        <td> <a class="name" href="concessionaires/{{$Consumer->id}}">{{$Consumer->last_name}}, {{$Consumer->first_name}} {{$Consumer->middle_name}}</a> </td>
+                                    
+                                        <td> {{$Consumer->last_name}}, {{$Consumer->first_name}} {{$Consumer->middle_name}}</td>
                                         <td>
                                         {{$Consumer->purok}}             
-                                        </td>
-                                        <td>
-                                        {{$Consumer->rate->name}}             
                                         </td>
                                         @php 
                                         $new_rec = 0;
@@ -56,7 +52,7 @@
                                             data-rate="{{$Consumer->rate->rate}}"
                                             data-excessrate="{{$Consumer->rate->excessrate}}"
                                             data-prevbill=" {{$new_rec}}"
-                                            data-meternum = "{{$Consumer->meternum}}">Add Bill Record</a></td>
+                                            data-meternum = "{{$Consumer->meternum}}"> <i class="fa fa-plus"></i> Bill</a></td>
                                         
                                     </tr>
                                     <?php //}?>
@@ -159,28 +155,36 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h3>ROMARATE WATER BILLING SYSTEM</h3>
-                        <table class="table">
+                        <h3 class="text-center">ROMARATE WATER BILLING SYSTEM</h3>
+                        <table class="table text-center" style="width:220px;">
                             <tr>
                                 <td><b>Account:</b></td>
                                 <td> <p id="account_name"></p></td>
+                                
+                            </tr>
+                            <tr>
                                 <td><b>Due Date:</b></td>
                                 <td><p id="due_date"></p></td>
-                            
                             </tr>
 
                             <tr>
-                                <td colspan='4' style="text-align:center"><b>PERIOD COVERED:</b> <span id="period_covered"></span></td>
+                                <td colspan='2' style="text-align:center"><b>PERIOD COVERED:</b> <span id="period_covered"></span></td>
                             </tr>
                             <tr>
                                 <td><b>PRESENT:</b></td>
                                 <td><b>PREVIOUS:</b></td>
-                                <td><b>USED:</b></td>
-                                <td><b>AMOUNT:</b></td>
+                                
                             </tr>
                             <tr>
                                 <td><p id="present_rec"></p></td>
                                 <td><p id="previous_rec"></p></td>
+                                
+                            </tr>
+                            <tr>
+                                <td><b>USED:</b></td>
+                                <td><b>AMOUNT:</b></td>
+                            </tr>
+                            <tr>
                                 <td><p id="used_rec"></p></td>
                                 <td><p id="amount_rec"></p></td>
                             </tr>

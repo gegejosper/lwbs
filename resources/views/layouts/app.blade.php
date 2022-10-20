@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <link rel="shortcut icon" href="assets/ico/favicon.ico">
 
-<title>Lantungan Online Water Billing System</title>
+<title>Romarate Online Water Billing System</title>
 
 <!-- Bootstrap core CSS -->
 
