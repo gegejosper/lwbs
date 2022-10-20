@@ -36,6 +36,12 @@
             .no-print {
                 display:none;
             }
+            .modal-dialog {
+            margin: 0px;
+            }
+            .modal-content {
+                border: 0px;
+            }
         </style>
     </head>
     <body class="skin-blue">
