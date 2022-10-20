@@ -42,6 +42,9 @@
             .modal-content {
                 border: 0px;
             }
+            .modal-body {
+                padding: 0px;
+            }
         </style>
     </head>
     <body class="skin-blue">
