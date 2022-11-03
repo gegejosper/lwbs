@@ -8,6 +8,8 @@ use Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class SettingsController extends Controller
 {
@@ -17,6 +19,7 @@ class SettingsController extends Controller
         $data = Setting::find($request->id);
         $data->penalty = $request->penalty;
         $data->save();
+        Log::notice('Admin updated the penalty settings');
         return redirect('admin/setting');
     }
     public function settingDueDate(Request $request)
@@ -24,6 +27,7 @@ class SettingsController extends Controller
         $data = Setting::find($request->id);
         $data->duedate = $request->duedate;
         $data->save();
+        Log::notice('Admin updated the duedate settings');
         return redirect('admin/setting');
     }
     public function settingDiscount(Request $request)
@@ -31,6 +35,7 @@ class SettingsController extends Controller
         $data = Setting::find($request->id);
         $data->discount = $request->discount;
         $data->save();
+        Log::notice('Admin updated the discount settings');
         return redirect('admin/setting');
     }
     public function settingNotice(Request $request)

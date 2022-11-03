@@ -7,7 +7,8 @@ use App\Position;
 use Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
-
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 class PositionController extends Controller
 {
     //
@@ -25,9 +26,6 @@ class PositionController extends Controller
             $data = new Position();
             $data->name = $request->pos_name;
             $data->save();
-
-            
-
             return response()->json($data);
         }
         //console.log($request->pos_name);

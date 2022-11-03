@@ -85,6 +85,7 @@ $(document).ready(function() {
             $('#account_name').text($('#account').val());
             $('#meternum_bill').text($('#meternum').val());
             $('#due_date').text(data.monthlyDueDate);
+            $('#disconnection').text(data.disconnection);
             $('#period_covered').text(data.monthlyBillDate);
             $('#present_rec').text(data.newrec);
             $('#previous_rec').text(data.prevrec);

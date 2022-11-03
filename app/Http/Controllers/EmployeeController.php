@@ -7,6 +7,8 @@ use Validator;
 use Response;
 use App\User;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -33,8 +35,11 @@ class EmployeeController extends Controller
             $data->usertype = $request->position;
             $data->meternum = '0000-00-0';
             $data->email = $request->email;
+            $data->username = $request->username;
             $data->password = bcrypt($request->password);
             $data->save();
+            $user_name = Auth::user()->lname.', '.Auth::user()->fname;
+            Log::notice($user_name.' added new user to the system'.$request->lname.', '.$request->fname);
             return response()->json($data);
         }
     }

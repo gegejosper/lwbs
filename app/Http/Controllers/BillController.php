@@ -9,6 +9,8 @@ use App\Setting;
 use App\Monthlybill;
 use Auth;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+
 
 class BillController extends Controller
 {
@@ -29,12 +31,16 @@ class BillController extends Controller
         } else {
             $dataSetting = Setting::first();
             $duedate = $dataSetting->duedate;
+            $disconnection = $duedate + $dataSetting->days;
             
             $finalDueDate = $nextWeek = time() + ($duedate * 24 * 60 * 60);
+            $disconnection = time() + ($disconnection * 24 * 60 * 60);
             //dd($request);
             $dataMonth = Monthlybill::where('meternum', '=', $request->meternum)
                         ->where('monthlyBillDate', '=', date("Y-m"))
                         ->first();
+            $user_name = Auth::user()->lname.', '.Auth::user()->fname;
+            Log::notice($user_name.' record monthly bill for meter # '.$request->meternum);
             if($dataMonth){
                 $data =  Monthlybill::find($dataMonth->id);
                 $data->cubicCount = $request->cubic;
@@ -46,6 +52,7 @@ class BillController extends Controller
                 $data->billAmount = $request->payment;
                 $data->status ='unpaid';
                 $data->meternum = $request->meternum;
+                $data->disconnection = date("Y-m-d", $disconnection);
                 $data->save();
                 return response()->json($data);
             }
@@ -60,8 +67,8 @@ class BillController extends Controller
                 $data->billAmount = $request->payment;
                 $data->status ='unpaid';
                 $data->meternum = $request->meternum;
+                $data->disconnection = date("Y-m-d", $disconnection);
                 $data->save();
-
                 return response()->json($data);
             }
         }

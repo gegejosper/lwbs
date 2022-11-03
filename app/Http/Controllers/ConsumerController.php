@@ -14,6 +14,7 @@ use Auth;
 use Redirect;
 use App\Setting;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 
 class ConsumerController extends Controller
 {
@@ -121,7 +122,8 @@ class ConsumerController extends Controller
 
             $dataCons->pic = 'pic';
             $dataCons->save();
-
+            $user_name = Auth::user()->lname.', '.Auth::user()->fname;
+            Log::notice($user_name.' added new consumer '.$request->lname.', '.$request->fname);
             return view('regsuccess', compact('dataUser'));
         }
         

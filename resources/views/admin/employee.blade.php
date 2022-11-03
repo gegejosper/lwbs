@@ -18,18 +18,19 @@
                                                 <div class="input-group input-group-sm">
                                                                 {{ csrf_field() }}   
                                                                    
-                                                                   <input type="text" class="form-control margin-bottom" name="fname" placeholder="First Name">      
-                                                                   <input type="text" class="form-control margin-bottom" name="lname" placeholder="Last Name">
-                                                                   <input type="text" class="form-control margin-bottom" name="mname" placeholder="Middle Name" >
-                                                                   <input type="email" class="form-control margin-bottom" name="email" placeholder="Email Address" >
-                                                                   <input type="password" class="form-control margin-bottom" name="password" placeholder="Password" id="password">
-                                                                   <input type="password" class="form-control margin-bottom" name="repassword" placeholder="Retype Password" >
-                                                                   <select name="position" id="categories" class="form-control margin-bottom">
-                                                                   @foreach($dataPosition as $Position)
-                                                                   <option value="{{$Position->name}}">{{$Position->name}}</option>
-                                                                    @endforeach
-                                                                   </select>
-                                                                    <button class="btn btn-info btn-flat" type="submit" id="add">Save</button>
+                                                        <input type="text" class="form-control margin-bottom" name="fname" placeholder="First Name">      
+                                                        <input type="text" class="form-control margin-bottom" name="lname" placeholder="Last Name">
+                                                        <input type="text" class="form-control margin-bottom" name="mname" placeholder="Middle Name" >
+                                                        <input type="email" class="form-control margin-bottom" name="email" placeholder="Email Address" >
+                                                        <input type="text" class="form-control margin-bottom" name="username" placeholder="Username" >
+                                                        <input type="password" class="form-control margin-bottom" name="password" placeholder="Password" id="password">
+                                                        <input type="password" class="form-control margin-bottom" name="repassword" placeholder="Retype Password" >
+                                                        <select name="position" id="categories" class="form-control margin-bottom">
+                                                        @foreach($dataPosition as $Position)
+                                                        <option value="{{$Position->name}}">{{$Position->name}}</option>
+                                                        @endforeach
+                                                        </select>
+                                                        <button class="btn btn-info btn-flat" type="submit" id="add">Save</button>
                                                                    
                                                               
                                                            </div>

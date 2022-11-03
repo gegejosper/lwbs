@@ -13,6 +13,8 @@ use App\Monthlybill;
 use App\Setting;
 use App\Bill;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class ConcessionaireController extends Controller
 {
@@ -72,7 +74,8 @@ class ConcessionaireController extends Controller
             $dataBill->status ='1';
             $dataBill->meternum = $request->meternum;
             $dataBill->save();
-
+            $user_name = Auth::user()->lname.', '.Auth::user()->fname;
+            Log::notice($user_name.' added new consumer '.$request->lname.', '.$request->fname);
             return response()->json($dataCons);
         }
     }
@@ -204,6 +207,8 @@ class ConcessionaireController extends Controller
         $updateConcessionaire = Concessionaire::find($getCon->id)
                     ->update(['status' => 'disconnected'
                     ]);
+        $user_name = Auth::user()->lname.', '.Auth::user()->fname;
+        Log::notice($user_name.' disconnect '.$getCon->last_name.', '.$getCon->first_name);
         return redirect('/admin/consumer/'.$getCon->id);
     }
     public function reconnect($meternum)
@@ -213,6 +218,8 @@ class ConcessionaireController extends Controller
         $updateConcessionaire = Concessionaire::find($getCon->id)
                     ->update(['status' => 'connected'
                     ]);
+        $user_name = Auth::user()->lname.', '.Auth::user()->fname;
+        Log::notice($user_name.' reconnect '.$getCon->last_name.', '.$getCon->first_name);
         return redirect('/admin/consumer/'.$getCon->id);
     }
     public function deleteconsumer(Request $req)

@@ -8,6 +8,7 @@ use App\Concessionaire;
 use App\Monthlybill;
 use App\Setting;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicantController extends Controller
 {

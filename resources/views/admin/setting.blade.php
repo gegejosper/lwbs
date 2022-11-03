@@ -85,12 +85,12 @@
                                     </div><!-- /.box -->
                                 </div>
                               
-                                                <!-- <div class="col-lg-6">
+                                                <div class="col-lg-6">
                                                     <div class="box box-danger">
                                                         <div class="box-header">
-                                                            <h3 class="box-title">Notice</h3>
+                                                            <h3 class="box-title">Notice of Disconnection</h3>
                                                         </div>
-                                                        <div class="box-body"> <label for="">Number of Days</label>
+                                                        <div class="box-body"> <label for="">Number of Days after due date</label>
                                                             <div class="input-group input-group-sm">
                                                             
                                                                 <input type="text" class="form-control" value="{{$Settings->days}}" name="days">
@@ -100,7 +100,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div> -->
+                                                </div>
                                                 <!-- <div class="col-lg-6">
                                                     <div class="box box-danger">
                                                         <div class="box-header">

@@ -68,6 +68,7 @@ $(document).ready(function() {
                     'lname': $('input[name=lname]').val(),
                     'mname': $('input[name=mname]').val(),
                     'password': $('input[name=password]').val(),
+                    'username': $('input[name=username]').val(),
                     'email': $('input[name=email]').val(),
                     'position': $('select[name=position]').val()
                 },

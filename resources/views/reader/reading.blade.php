@@ -155,7 +155,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h3 class="text-center">ROMARATE WATER BILLING SYSTEM</h3>
-                        <table class="table text-center" style="width:220px;">
+                        <table class="table text-left" style="width:220px;">
                             <tr>
                                 <td><b>Account:</b></td>
                                 <td> <p id="account_name"></p></td>
@@ -165,7 +165,10 @@
                                 <td><b>Due Date:</b></td>
                                 <td><p id="due_date"></p></td>
                             </tr>
-
+                            <tr>
+                                <td><b>Disconnection:</b></td>
+                                <td><p id="disconnection"></p></td>
+                            </tr>
                             <tr>
                                 <td colspan='2' style="text-align:center"><b>PERIOD COVERED:</b> <span id="period_covered"></span></td>
                             </tr>

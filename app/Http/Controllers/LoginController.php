@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -16,8 +17,9 @@ class LoginController extends Controller
             'username' => $request->username,
             'password' => $request->password
         ])){
+
             $user = User::where('username', $request->username )->first();
-        
+            Log::notice($user->fname.' logged in the system.');
             if($user->usertype=='admin'){
                 return redirect('admin/dashboard');
             }

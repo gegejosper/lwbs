@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Setting;
 use App\Concessionaire;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class MeterController extends Controller
 {

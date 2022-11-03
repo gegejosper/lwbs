@@ -8,6 +8,8 @@ use App\Category;
 use Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class RateController extends Controller
 {
@@ -32,7 +34,7 @@ class RateController extends Controller
             $data->rate = $request->rate;
             $data->excessrate = $request->erate;
             $data->save();
-
+            Log::notice('Admin added new rate '.$request->cat_name);
             return response()->json($data);
         }
     }
@@ -51,13 +53,12 @@ class RateController extends Controller
         $data->rate = $req->rate; 
         $data->excessrate = $req->erate; 
         $data->save();
-
+        Log::notice('Admin edit the rate '.$req->cat_name);
         return response()->json($data);
     }
     public function deleteRate(Request $req)
     {
         Rate::find($req->id)->delete();
-
         return response()->json();
     }
 }
