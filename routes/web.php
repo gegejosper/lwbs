@@ -84,7 +84,7 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::get('/consumer/connected', 'ConcessionaireController@connectedConcessionaire')->name('connectedConcessionaire');
     Route::get('/consumer/disconnected', 'ConcessionaireController@disconnectedConcessionaire')->name('disconnectedConcessionaire');
     Route::get('/consumer/pending', 'ConcessionaireController@applicantConcessionaire')->name('applicantConcessionaire');
-    Route::get('/consumer/{id}', 'ConcessionaireController@concessionaire')->name('singleconcessionaire');
+    Route::get('/consumer/{id}', 'ConcessionaireController@admin_consumer')->name('admin_consumer');
     Route::get('/consumer/purok/{clark}', 'ConcessionaireController@viewClark')->name('viewClark');
     Route::post('/consumer/addconsumer', 'ConcessionaireController@addconsumer')->name('addconsumer');
     Route::post('/consumer/editconsumer', 'ConcessionaireController@editconsumer')->name('editconsumer');
@@ -92,6 +92,7 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
 
     Route::get('/disconnect/{meternum}', 'ConcessionaireController@disconnect')->name('disconnect');
     Route::get('/reconnect/{meternum}', 'ConcessionaireController@reconnect')->name('reconnect');
+    Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
     //Route::get('/dashboard', 'CashierController@index')->name('cashierdashboard');
     //Route::get('/search', 'CashierController@search')->name('search');
@@ -118,10 +119,12 @@ Route::group(['middleware' =>'cashierAuth', 'prefix' => 'collector'], function()
 
     Route::get('/dashboard', 'CollectorController@index')->name('cashierdashboard');
     Route::get('/search', 'CollectorController@search')->name('search');
+    Route::get('/bill/search', 'CollectorController@search_bill')->name('search_bill');
     Route::get('/report', 'CollectorController@report')->name('cashierreport');
     Route::post('/report/generate', 'CollectorController@generatereport')->name('cashiergeneratereport');
     Route::get('/payment/{id}', 'CollectorController@payment')->name('cashierpayment');
     Route::get('/success/{id}', 'CollectorController@success')->name('cashierpayment_success');
+    Route::get('/view_reciept/{id}', 'CollectorController@view_reciept')->name('view_reciept');
     Route::post('/processpayment', 'CollectorController@processpayment')->name('processpayment');
     Route::get('/payment/pay/{id}/{billId}/{amount}', 'CollectorController@addpay')->name('addpay');
     Route::get('/payment/removepay/{id}/{billId}/', 'CollectorController@removepay')->name('removepay');
@@ -132,6 +135,7 @@ Route::group(['middleware' =>'meterAuth', 'prefix' => 'reader'], function(){
 
     Route::get('/dashboard', 'MeterController@index')->name('readerdashboard');
     Route::get('/reading', 'MeterController@reading')->name('reader.reading');
+    Route::post('/search_consumer', 'MeterController@search_consumer')->name('search_consumer');
     Route::get('/report', 'MeterController@report')->name('reader.report');
     Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('reader.Concessionaires');
     Route::get('/concessionaires/{id}', 'ConcessionaireController@readerconcessionaire')->name('reader.concessionaire');

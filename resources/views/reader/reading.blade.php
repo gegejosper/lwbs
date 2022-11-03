@@ -23,12 +23,11 @@
                                     </tr>
                                     @foreach($data_consumers as $Consumer)
                             
-                                    <!-- <?php 
-                                    //echo $date = date('Y-m');
-                                    //echo $Billdate = $User->bill->monthlyBillDate;
-                                    //if($User->bill->monthlyBillDate == $date ) {   
-                                    //}
-                                    //else {?> -->
+                                    <?php 
+                                    $date = date('Y-m');
+                                    if($Consumer->bill != null && $Consumer->bill->monthlyBillDate == $date) {   
+                                    }
+                                    else {?>
                                     <tr class="item{{$Consumer->id}}">
                                     <td>{{$Consumer->meternum}}</td>
                                     
@@ -55,7 +54,7 @@
                                             data-meternum = "{{$Consumer->meternum}}"> <i class="fa fa-plus"></i> Bill</a></td>
                                         
                                     </tr>
-                                    <?php //}?>
+                                    <?php }?>
                                     @endforeach
                                     
                                     </tbody>

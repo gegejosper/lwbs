@@ -50,7 +50,7 @@
                                                        </td>
                                                       
                                                         <td class="td-actions">        
-                                                            <a href="consumers/{{$consumer->id}}" class="edit-modal btn btn-primary btn-flat" >View Account Record</a>
+                                                            <a href="consumers/{{$consumer->id}}" class="btn btn-primary btn-flat" >View Account Record</a>
                                                         </td>
                                                        
                                                         

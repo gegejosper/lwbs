@@ -25,14 +25,19 @@
                                     </tr>
                                     
                                     @forelse($dataBill as $Bill)
-                                    <tr class="item{{$Bill->id}}">
-                                    <td>{{$Bill->id}}</td>
-                                    <td><a href="/admin/concessionaire/{{$Bill->concessionaire->id}}">{{$Bill->meternum}}</a></td>
-                                    <td><a href="/admin/concessionaire/{{$Bill->concessionaire->id}}">{{$Bill->concessionaire->last_name}}, {{$Bill->concessionaire->first_name}}</a></td>
-                                    <td>{{$Bill->monthlyDueDate}}</td>
-                                    <td>{{$Bill->concessionaire->purok}}</td>
+                                    <tr class="item{{$Bill[0]->id}}">
+                                    <td>{{$Bill[0]->monthlyBillDate}}-{{$Bill[0]->id}}</td>
+                                    <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->meternum}}</a></td>
+                                    <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->concessionaire->last_name}}, {{$Bill[0]->concessionaire->first_name}}</a></td>
+                                    <td>{{$Bill[0]->monthlyDueDate}}</td>
+                                    <td>{{$Bill[0]->concessionaire->purok}}</td>
                                     <td>
-                                    <a href="/admin/disconnect/{{$Bill->meternum}}" class="btn btn-danger btn-flat">Disconnect</a>
+                                        @if($Bill[0]->concessionaire->status == 'disconnected')
+                                            <em>disconnected</em>    
+                                        
+                                        @else
+                                            <a href="/admin/disconnect/{{$Bill[0]->meternum}}" class="btn btn-danger btn-flat">Disconnect</a>
+                                        @endif
                                     </td>
                                     
                                     </tr>
@@ -90,20 +95,20 @@
                                     </a>
                             </div>
                             <div class="small-box bg-red">
-                                    <div class="inner">
-                                        <h3>
-                                        {{$dataConcessionairediscon}}
-                                        </h3>
-                                        <p>
-                                            Total Disconnected
-                                        </p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-alert-circled"></i>
-                                    </div>
-                                    <a href="/admin/concessionaire/disconnected" class="small-box-footer">
-                                        More info <i class="fa fa-arrow-circle-right"></i>
-                                    </a>
+                                <div class="inner">
+                                    <h3>
+                                    {{$dataConcessionairediscon}}
+                                    </h3>
+                                    <p>
+                                        Total Disconnected
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-alert-circled"></i>
+                                </div>
+                                <a href="/admin/concessionaire/disconnected" class="small-box-footer">
+                                    More info <i class="fa fa-arrow-circle-right"></i>
+                                </a>
                             </div>
                         </div>
                     </div>

@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -28,12 +29,13 @@ class AdminController extends Controller
         //     $name = Auth::user()->name;
         // }
         // dd($name);
-        $dataBill = Monthlybill::where('status', '=', 0)
+        $dataBill = Monthlybill::where('status', 'unpaid')
         ->where('billAmount', '!=', 0)
         ->where('monthlyDueDate', '<=', date('Y-m-d'))
         ->with('concessionaire')
         ->get();
-        
+        $dataBill = $dataBill->groupBy('meternum');
+        //dd($dataBill);
         $dataConcessionaire = Concessionaire::where('status', '=', 'connected')->count();
         $dataApplicant = Concessionaire::where('status', '=', 'pending')->count();
         $dataConcessionaireAll = Concessionaire::where('status', '!=', 'pending')->count();

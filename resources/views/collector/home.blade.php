@@ -15,7 +15,7 @@
                     <form method="get" action="/collector/bill/search">
                         <div class="input-group input-group-sm">
                             
-                            <input type="text" class="form-control" placeholder="Search Concessionaire" name="q">
+                            <input type="text" class="form-control" placeholder="Search Consumer" name="q">
                             <span class="input-group-btn">
                                 <button class="btn btn-info btn-flat" type="submit">Search</button>
                             </span>

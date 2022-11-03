@@ -7,6 +7,7 @@ use App\User;
 use App\Concessionaire;
 use App\Monthlybill;
 use App\Setting;
+use Illuminate\Support\Facades\Log;
 
 class ApplicantController extends Controller
 {

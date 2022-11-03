@@ -24,6 +24,18 @@ class MeterController extends Controller
         //dd($data_consumers);
         return view('reader.reading',compact('data_consumers'));
     }
+
+    public function search_consumer(Request $request){
+        $q = $request->input('q');
+        //return $query->where('name', 'LIKE', %search%);
+        $data_consumers = Concessionaire::where('first_name', 'LIKE', '%'.$q.'%')
+        ->orWhere('last_name', 'LIKE', '%'.$q.'%')
+        ->orWhere('meternum', 'LIKE', '%'.$q.'%')
+        ->paginate(20);
+        $data_consumers->appends(['q' => $q]);
+        //dd($dataUser);                
+        return view('reader.reading',compact('data_consumers'));
+    }
     public function report()
     {
         $dataUsers = Concessionaire::with('user','rate','bill')

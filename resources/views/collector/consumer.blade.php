@@ -45,10 +45,10 @@
 
                                                         @foreach($billHistory as $History)
                                                         <tr>
-                                                            <td>{{$History->id}}</td>
-                                                            <td>{{$History->monthlyRecordDate}}</td>
+                                                            <td>{{$History->monthlyBillDate}}-{{$History->id}}</td>
+                                                            <td>{{$History->monthlyBillDate}}</td>
                                                             <td>{{$History->newrec}}</td>
-                                                            <td>{{$History->billAmount}}</td>
+                                                            <td>{{number_format($History->billAmount,2)}}</td>
                                                             <td>{{$History->status}}</td>
                                                            
                                                         </tr>
@@ -65,21 +65,19 @@
                                                 <div class="box-body table-responsive padding">
                                                     <table class="table table-hover" id="table">
                                                         <tbody><tr>
-                                                            <th>ID</th>
                                                             <th>Date</th>
                                                             <th>OR Number</th>
                                                             <th>Amount</th>
-                                                            <th>Status</th>
-                                                           
+                                        
+                                                           <th></th>
                                                         </tr>
                                                         @foreach($paymentHistory as $Payment)
                                                         <tr>
-                                                            <td>{{$Payment->id}}</td>
                                                             <td>{{$Payment->datepaid}}</td>
                                                             <td>{{$Payment->officialReciept}}</td>
-                                                            <td>{{$Payment->amount}}</td>
-                                                            <td>{{$Payment->status}}</td>
-                                                           
+                                                            <td>{{number_format($Payment->amount,2)}}</td>
+                                                        
+                                                            <td><a href="/collector/view_reciept/{{$Payment->id}}" class="btn btn-info"> <i class="fa fa-search" style="color:#fff;"></i></a></td>
                                                         </tr>
                                                         @endforeach
                                                     </table>

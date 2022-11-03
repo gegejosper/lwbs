@@ -13,6 +13,8 @@ Use App\Bill;
 use Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CollectorController extends Controller
 {
@@ -35,6 +37,26 @@ class CollectorController extends Controller
             $amount= $amount + $dataCollectibles->billAmount;
         }
         $payments = Monthlybill::where('status','=',1)->get();
+        $paymentsamount = 0;
+        foreach($payments as $payment){
+            $paymentsamount= $paymentsamount + $payment->billAmount;
+        }
+        return view('collector.home', compact('consumers','dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'collectibles'));
+    }
+    public function search_bill(){
+        $consumers = Concessionaire::with('rate','cashierbill')
+        ->get();
+        $dataConcessionaire = Concessionaire::where('status', '=', 'connected')->count();
+        $dataConcessionaireAll = Concessionaire::count();
+        $dataConcessionairediscon = Concessionaire::where('status', '=', 'disconnected')->count();
+        $dataSetting = Setting::all();
+        $collectibles = Monthlybill::with('consumer_details.rate')->where('status','unpaid')->get();
+        //dd($collectibles);
+        $amount = 0;
+        foreach($collectibles as $dataCollectibles){
+            $amount= $amount + $dataCollectibles->billAmount;
+        }
+        $payments = Monthlybill::where('status','paid')->get();
         $paymentsamount = 0;
         foreach($payments as $payment){
             $paymentsamount= $paymentsamount + $payment->billAmount;
@@ -84,7 +106,7 @@ class CollectorController extends Controller
         $Account = Concessionaire::where('id', $id)->with('rate')->first(); 
         $Rate = Rate::find($Account->category);
         $Bills = Monthlybill::with('temp_bill')->where('meternum', '=', $Account->meternum)
-                            ->where('status', '=', 0)
+                            ->where('status', 'unpaid')
                             ->get();
         $TempBills = Tempbill::with('monthly_bill')->get();                   
         //dd($TempBills);
@@ -104,6 +126,13 @@ class CollectorController extends Controller
         $Bill = Bill::where('consumerId', '=', $id)->orderBy('id', 'desc')->take(1)->get();
         //dd($Bill); 
         return view('collector.successpayment', compact( 'Account', 'TempBills', 'dataSetting', 'Bill', 'Rate'));
+    }
+
+    public function view_reciept($payment_id)
+    {
+        $Bill = Bill::with('consumer_details', 'user_details')->find($payment_id);
+        //dd($Bill); 
+        return view('collector.reciept', compact('Bill'));
     }
     public function addpay($id,$billid,$amount)
     {
@@ -125,9 +154,13 @@ class CollectorController extends Controller
     }
     public function processpayment(Request $request)
     {
+        $user_id = Auth::user()->id;
+        $user_name = Auth::user()->lname.', '.Auth::user()->fname;
+        if($request->amount > $request->cash_rendered){
+            return redirect()->back()->with('warning','Cash rendered is lesser than the amount to pay...');
+        }
         $rules = array(
-                'officialReciept' => 'required',
-                
+            'officialReciept' => 'required',
         );
         $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
@@ -135,7 +168,7 @@ class CollectorController extends Controller
                         'errors' => $validator->getMessageBag()->toArray(),
                 ));
             } else {
-                $dataTempBill = Tempbill::where('userId', $request->userId)->get();
+                $dataTempBill = Tempbill::where('userId', $request->userId)->get(['MonthlyBillId', 'id']);
                 //dd($dataTempBill);
                 $data = new Bill();
                 $data->amount = $request->amount;
@@ -146,6 +179,9 @@ class CollectorController extends Controller
                 $data->cpenalty = $request->penalty;
                 $data->discount = 0;
                 $data->officialReciept = $request->officialReciept;
+                $data->user_id =  $user_id;
+                $data->change =  $request->cash_rendered - $request->amount;
+                $data->cash_rendered =  $request->cash_rendered;
                 $data->save();  
 
                 foreach ($dataTempBill as $tempBill) {
@@ -155,8 +191,8 @@ class CollectorController extends Controller
                     $dataBill->save();
                     Tempbill::find($tempBill->id)->delete();
                 }
-                
-                return redirect('/collector/success/'.$request->userId);
+                Log::notice($user_name.' process payment for OR #'.$request->officialReciept);
+                return redirect('/collector/view_reciept/'.$data->id);
                 //return view('cashier.successpayment', compact('Concessionaire', 'Rate', 'Bills', 'Account', 'TempBills', 'dataSetting'));
                 //return response()->json($data);
             }

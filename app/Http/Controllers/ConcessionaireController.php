@@ -201,19 +201,19 @@ class ConcessionaireController extends Controller
     {
         $getCon = Concessionaire::where('meternum', '=', $meternum)->first();
         
-        $updateConcessionaire = Concessionaire::where('userId', '=', $getCon->userId)
+        $updateConcessionaire = Concessionaire::find($getCon->id)
                     ->update(['status' => 'disconnected'
                     ]);
-        return redirect('/admin/concessionaire/'.$getCon->userId);
+        return redirect('/admin/consumer/'.$getCon->id);
     }
     public function reconnect($meternum)
     {
         $getCon = Concessionaire::where('meternum', '=', $meternum)->first();
         
-        $updateConcessionaire = Concessionaire::where('userId', '=', $getCon->userId)
+        $updateConcessionaire = Concessionaire::find($getCon->id)
                     ->update(['status' => 'connected'
                     ]);
-        return redirect('/admin/concessionaire/'.$getCon->userId);
+        return redirect('/admin/consumer/'.$getCon->id);
     }
     public function deleteconsumer(Request $req)
     {
@@ -277,8 +277,8 @@ class ConcessionaireController extends Controller
         
         $Concessionaire = Concessionaire::with('rate')->find($id);
         //dd($Concessionaire);
-        $paymentHistory = Bill::where('consumerId','=',$id)->get();
-        $billHistory = Monthlybill::where('meternum','=',$Concessionaire->meternum)->get();
+        $paymentHistory = Bill::where('consumerId','=',$id)->latest()->get();
+        $billHistory = Monthlybill::where('meternum','=',$Concessionaire->meternum)->latest()->get();
        
         
         $Account = Concessionaire::where('meternum', '=', $Concessionaire->meternum)->first(); 
@@ -294,5 +294,16 @@ class ConcessionaireController extends Controller
         // $Rate = Rate::find($Account->category);
         // //dd($Rate);
         //  return view('cashier.concessionaire', compact('Concessionaire', 'Rate','billHistory'));
+    }
+
+    public function admin_consumer($id)
+    {
+        $Concessionaire = Concessionaire::with('rate')->find($id);
+        $paymentHistory = Bill::where('consumerId','=',$id)->get();
+        $billHistory = Monthlybill::where('meternum','=',$Concessionaire->meternum)->get();
+       
+        $Account = Concessionaire::where('meternum', '=', $Concessionaire->meternum)->first(); 
+        $Rate = Rate::find($Account->category);
+        return view('admin.consumer', compact('Concessionaire', 'Rate', 'billHistory', 'Account', 'paymentHistory'));
     }
 }

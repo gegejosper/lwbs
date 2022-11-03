@@ -10,29 +10,26 @@
                                     <div class="box box-primary">
                                         <div class="box-header">
                                             <h3 class="box-title">Profile</h3>
-                                            
                                         </div><!-- /.box-header -->
                                         <div class="box-body table-responsive padding">
                                             <div class="row">
                                                 <div class="col-lg-12" align="center">
                                                 <img src="{{ asset('img/profile.png') }}" class="img-circle text-center" alt="User Image" style="width:100px;" align="center"/><br><br>
                                                 <ul class="list-group list-group-flush text-left">
-                                                <li class="list-group-item"> <label>Name: </label> {{$Concessionaire->lname}}, {{$Concessionaire->fname}} {{$Concessionaire->mname}} </li>
-                                                <li class="list-group-item"><label for="Meter Number">Meter Number: </label> {{$Concessionaire->concessionaire->meternum}}</li>
-                                                <li class="list-group-item"><label for="Clark">Clark: </label> {{$Concessionaire->concessionaire->clark}}</li>
-                                                <li class="list-group-item"><label for="Clark">Category: </label> {{$Rate->name}}</li>
-                                                <li class="list-group-item"><label for="Clark">Status: </label> {{$Concessionaire->concessionaire->status}}</li>
-                                                </ul>
-                                                <?php 
-                                                $status=$Concessionaire->concessionaire->status;
-                                                if(( $status == 'connected')) {
+                                                <li class="list-group-item"> <label>Name: </label> {{$Concessionaire->last_name}}, {{$Concessionaire->first_name}} </li>
+                                                <li class="list-group-item"><label for="Meter Number">Meter Number: </label> {{$Concessionaire->meternum}}</li>
+                                                <li class="list-group-item"><label for="Purok">Purok: </label> {{$Concessionaire->purok}}</li>
+                                                <li class="list-group-item"><label for="Category">Category: </label> {{$Concessionaire->rate->name}}</li>
+                                                <li class="list-group-item"><label for="Status">Status: </label> {{$Concessionaire->status}}</li>
+                                                <div class="text-center" style="margin-top:10px;">
+                                                @if($Concessionaire->status == 'connected')
+                                                <a href="/admin/disconnect/{{$Concessionaire->meternum}}" class="btn btn-danger btn-flat">Disconnect</a>
+                                                @else 
+                                                <a href="/admin/reconnect/{{$Concessionaire->meternum}}" class="btn btn-info btn-flat">Re-connect</a>
+                                                @endif
+                                                </div>
                                                 
-                                                echo '<a href="/admin/disconnect/'.$Account->meternum.'" class="btn btn-danger btn-flat">Disconnect</a>';
-                                                }
-                                                else {
-                                                    echo '<a href="/admin/reconnect/'.$Account->meternum.'" class="btn btn-primary btn-flat">Connect</a>';
-                                                }
-                                                ?>
+                                                </ul>
                                                 </div>
                                                 
                                             </div>
@@ -56,19 +53,11 @@
 
                                                         @foreach($billHistory as $History)
                                                         <tr>
-                                                            <td>{{$History->id}}</td>
+                                                            <td>{{$History->monthlyBillDate}}-{{$History->id}}</td>
                                                             <td>{{$History->monthlyRecordDate}}</td>
                                                             <td>{{$History->newrec}}</td>
                                                             <td>{{$History->billAmount}}</td>
-                                                            <td><?php
-                                                                if($History->status == 1){
-                                                                    echo "PAID";
-                                                                }
-                                                                else {
-                                                                    echo "UNPAID";
-                                                                }
-                                                               
-                                                                ?></td>
+                                                            <td>{{$History->status}}</td>
                                                            
                                                         </tr>
                                                         @endforeach
@@ -84,28 +73,20 @@
                                                 <div class="box-body table-responsive padding">
                                                     <table class="table table-hover" id="table">
                                                         <tbody><tr>
-                                                            <th>ID</th>
+                                                        <th>OR Number</th>
                                                             <th>Date</th>
-                                                            <th>OR Number</th>
+                                                            
                                                             <th>Amount</th>
                                                             <th>Status</th>
                                                            
                                                         </tr>
                                                         @foreach($paymentHistory as $Payment)
                                                         <tr>
-                                                            <td>{{$Payment->id}}</td>
+                                                        <td>{{$Payment->officialReciept}}</td>
                                                             <td>{{$Payment->datepaid}}</td>
-                                                            <td>{{$Payment->officialReciept}}</td>
+                                                            
                                                             <td>{{$Payment->amount}}</td>
-                                                            <td><?php
-                                                                if($Payment->status== 1){
-                                                                    echo "PAID";
-                                                                }
-                                                                else {
-                                                                    echo "UNPAID";
-                                                                }
-                                                               
-                                                                ?></td>
+                                                            <td>{{$Payment->status}}</td>
                                                            
                                                         </tr>
                                                         @endforeach

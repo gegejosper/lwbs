@@ -58,7 +58,7 @@
                                 @foreach($Bills as $Bill)
                                     @if(empty($Bill->temp_bill))
                                     <tr>
-                                        <td>{{$Bill->id}}</td>
+                                        <td>{{$Bill->monthlyBillDate}}-{{$Bill->id}}</td>
                                         
                                         <td>{{$Bill->prevrec}}</td>
                                         <td>{{$Bill->newrec}}</td>
@@ -95,7 +95,7 @@
                                     @foreach($TempBills as $TempBill)
                                     <tr> 
                                        
-                                        <td>{{$TempBill->MonthlyBillId}}</td>
+                                        <td>{{$TempBill->monthly_bill->monthlyBillDate}}-{{$TempBill->monthly_bill->id}}</td>
                                         <td>
 
                                         <?php 
@@ -130,12 +130,7 @@
                             <form class="form-horizontal" role="form" action="/collector/processpayment" method="post">
                             {{ csrf_field() }}    
                             <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <th style="width:50%">OR Number:</th>
-                                        <td><input type="text" class="form-control officialReciept" name="officialReciept" id="officialReciept"  ></td>
-                                    </tr>
-                            
+                                <tbody>
                                     <tr>
                                         <th>Penalty</th>
                                         <td><input type="text" class="form-control penalty" name="penalty" id="penalty" readonly="readonly" value="{{$penalty}}"></td>
@@ -145,14 +140,28 @@
                                         <td><input type="text" class="form-control amount" name="amount" id="amount" readonly="readonly" value="<?php echo $tempamount;?>"></td>
                                     </tr>
                                     <tr>
-                                        <th>Sub Total:</th>
+                                        <th>Total:</th>
                                         <td><input type="text" class="form-control totalamount" name="amount" id="amount" readonly="readonly" value="<?php 
                                         $totalAmount = ($tempamount + $penalty);
                                         echo $totalAmount?>">
                                             </td>
                                     </tr>
-                                </tbody></table>
-                            
+                                    <tr>
+                                        <th style="width:50%">Cash Rendered:</th>
+                                        <td><input type="text" class="form-control cash_rendered" name="cash_rendered" id="cash_rendered"  minimum="<?php echo $totalAmount; ?>" required></td>
+                                    </tr>
+                                    <tr>
+                                        <th style="width:50%">OR Number:</th>
+                                        <td><input type="text" class="form-control officialReciept" name="officialReciept" id="officialReciept"  required></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                            @if(session('warning'))
+                            <div class="alert alert-danger" role="alert">
+                                <em>{{ session('warning') }}</em>
+                            </div>
+                            @endif
                             </div>
                         </div><!-- /.col -->
                         
@@ -162,7 +171,7 @@
                     <div class="row no-print">
                         <div class="col-xs-12">
                         <input type="hidden" class="form-control userId" name="userId" id="userId" value="{{$Account->id}}">
-                            <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
+                            <!-- <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button> -->
                             <button type="submit" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Submit Payment</button>  
                             </form>
                         </div>
