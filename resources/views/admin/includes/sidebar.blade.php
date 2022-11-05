@@ -10,8 +10,8 @@
                             </a>
                         </li> -->
                         <li class="active">
-                            <a href="/admin/employee">
-                                <i class="fa fa-user"></i> <span>Users</span>
+                            <a href="/admin/bills">
+                                <i class="fa fa-money"></i> <span>Bills</span>
                             </a>
                         </li>
                         <li class="active">
@@ -27,6 +27,11 @@
                                 </span> 
                             </a>
                         </li> -->
+                        <li class="active">
+                            <a href="/admin/employee">
+                                <i class="fa fa-user"></i> <span>Users</span>
+                            </a>
+                        </li>
                         <li class="active">
                             <a href="/admin/setting">
                                 <i class="fa  fa-gears"></i> <span>Setting</span>

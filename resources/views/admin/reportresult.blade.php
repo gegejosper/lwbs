@@ -26,8 +26,8 @@
               <th>OR #</th>
               <th>Consumer Name</th>
               <th>Penalty</th>
-              <th>Discount</th>
-              <th>Amount</th>
+              <th>Bill Amount</th>
+              <th>Total Amount</th>
             </tr>
             </thead>
             <tbody>
@@ -35,10 +35,10 @@
             <tr>
               <td>{{$Report->datepaid}}</td>
               <td>{{$Report->officialReciept}}</td>
-              <td>{{$Report->consumerId}}</td>
-              <td>{{$Report->cpenalty}}</td>
-              <td>{{$Report->discount}}</td>
-              <td>{{$Report->amount}}</td>
+              <td>{{$Report->consumer_details->last_name}}, {{$Report->consumer_details->first_name}}</td>
+              <td>{{number_format($Report->cpenalty,2)}}</td>
+              <td>{{number_format($Report->amount - $Report->cpenalty,2)}}</td>
+              <td>{{number_format($Report->amount,2)}}</td>
             </tr>
             @endforeach
             </tbody>

@@ -167,10 +167,8 @@ class ConcessionaireController extends Controller
     public function searchConcessionaire(Request $request){
         $q = $request->input('q');
         //return $query->where('name', 'LIKE', %search%);
-        $dataUser = User::where('usertype', '=', 'concessionaire')
-        ->where('fname', 'LIKE', '%'.$q.'%')
-        ->orWhere('lname', 'LIKE', '%'.$q.'%')
-        ->orWhere('mname', 'LIKE', '%'.$q.'%')
+        $dataUser = Concessionaire::where('first_name', 'LIKE', '%'.$q.'%')
+        ->orWhere('last_name', 'LIKE', '%'.$q.'%')
         ->paginate(20);
         $dataUser->appends(['q' => $q]);
         //dd($dataUser);                

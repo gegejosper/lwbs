@@ -12,7 +12,7 @@
                 
                 </div><!-- /.box-header -->
                 <div class="col-lg-8 padding pull-right" style="margin-bottom:20px;">
-                    <form method="get" action="/collector/bill/search">
+                    <form method="get" action="/collector/search">
                         <div class="input-group input-group-sm">
                             
                             <input type="text" class="form-control" placeholder="Search Consumer" name="q">
@@ -58,7 +58,7 @@
         </div>
         <!-- /.col-lg-4 -->
         <div class="col-lg-3">
-        <div class="panel panel-primary">
+            <!-- <div class="panel panel-primary">
                 <div class="panel-heading">
                 <i class="fa fa-money"> </i> Cashier Report
                 </div>
@@ -96,8 +96,8 @@
                         </a>
                     </div>
                 </div>   
-            </div>
-            <div class="panel panel-primary">
+            </div> -->
+            <!-- <div class="panel panel-primary">
                 <div class="panel-heading">
                 <i class="fa fa-envelope-o"> </i> Cashier Report
                 </div>
@@ -129,7 +129,7 @@
                 </div>
                 
             </div>
-            
+             -->
         </div>
     </div>
     <!-- top row -->

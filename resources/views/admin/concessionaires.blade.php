@@ -77,7 +77,7 @@
                     <div class="col-lg-8">
                         <div class="box box-primary">
                             <div class="box-header">
-                                <h3 class="box-title">Concessionaires List</h3>
+                                <h3 class="box-title">Consumer's List</h3>
                                 <!-- <div class="col-lg-4 push-right" style="float:right; margin-top:10px;">
                                     <form action="/admin/search" method="get">
                                         {{ csrf_field() }} 
@@ -104,7 +104,7 @@
                                     <tr class="item{{$Consumer->id}}">
                                     <td>{{$Consumer->id}}</td>
                                     <td>{{$Consumer->meternum}}</td>
-                                        <td> <a class="name" href="concessionaire/{{$Consumer->id}}">{{$Consumer->last_name}}, {{$Consumer->first_name}} {{$Consumer->middle_name}}</a> </td>
+                                        <td> <a class="name" href="admin/consumers/{{$Consumer->id}}">{{$Consumer->last_name}}, {{$Consumer->first_name}} {{$Consumer->middle_name}}</a> </td>
                                         <td>{{$Consumer->purok}}</td>
                                         <td>{{$Consumer->rate->name}}</td>
                                         <td class="td-actions">

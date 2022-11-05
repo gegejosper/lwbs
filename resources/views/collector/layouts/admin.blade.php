@@ -93,11 +93,11 @@
                         </li>
                         
                     
-                        <li class="active">
+                        <!-- <li class="active">
                             <a href="/collector/report">
                                 <i class="fa fa-folder-open-o"></i> <span>Report</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="active">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" > <i class="fa fa-reply"></i> <span>Logout</span></a>
                            

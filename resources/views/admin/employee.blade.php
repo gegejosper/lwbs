@@ -71,6 +71,7 @@
                                                             data-fname="{{$User->fname}}" 
                                                             data-lname="{{$User->lname}}" 
                                                             data-mname="{{$User->mname}}"
+                                                            data-username="{{$User->username}}"
                                                             data-password="{{$User->password}}" 
                                                             data-email="{{$User->email}}" 
                                                             data-position="{{$User->usertype}}"><i class="fa fa-pencil"> </i></a><a href="javascript:;" class="delete-modal btn btn-danger btn-small" data-id="{{$User->id}}"><i class="fa fa-times" style="color:#fff;"> </i></a></td>
@@ -123,6 +124,12 @@
   							<label class="control-label col-sm-2" for="medit_name" >Middle Name:</label>
   							<div class="col-sm-10">
   								<input type="text" class="form-control" id="medit_name" >
+  							</div>
+                        </div>
+                        <div class="form-group">
+  							<label class="control-label col-sm-2" for="medit_username" >Username:</label>
+  							<div class="col-sm-10">
+  								<input type="text" class="form-control" id="medit_username" >
   							</div>
                         </div>
                         <div class="form-group">

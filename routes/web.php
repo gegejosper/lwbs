@@ -39,6 +39,8 @@ Route::post('/admin/login', 'LoginController@userLogin')->name('user.login');
 Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::get('/dashboard', 'AdminController@index')->name('dashboard');
     Route::get('/insert', 'AdminController@insert')->name('insert');
+    Route::get('/bills', 'AdminController@bills')->name('bills');
+    Route::get('/reading', 'AdminController@reading')->name('insert');
     Route::get('/collectibles', 'AdminController@collectibles')->name('collectibles');
     Route::get('/payments', 'AdminController@payments')->name('payments');
     Route::get('/employee', 'AdminController@employee')->name('employee');

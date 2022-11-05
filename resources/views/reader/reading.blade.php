@@ -14,11 +14,10 @@
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover" id="table">
                                     <tbody><tr>
-                                        <th>ID</th>
-                                        
+                                        <th>Meter Number</th>
                                         <th>Name</th>
-                                        <th>Clark</th>
-                                        
+                                        <th>Purok</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     @foreach($data_consumers as $Consumer)
@@ -29,11 +28,14 @@
                                     }
                                     else {?>
                                     <tr class="item{{$Consumer->id}}">
-                                    <td>{{$Consumer->meternum}}</td>
+                                        <td>{{$Consumer->meternum}}</td>
                                     
                                         <td> {{$Consumer->last_name}}, {{$Consumer->first_name}} {{$Consumer->middle_name}}</td>
                                         <td>
                                         {{$Consumer->purok}}             
+                                        </td>
+                                        <td>
+                                        {{$Consumer->status}}             
                                         </td>
                                         @php 
                                         $new_rec = 0;

@@ -43,8 +43,12 @@ class CollectorController extends Controller
         }
         return view('collector.home', compact('consumers','dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'collectibles'));
     }
-    public function search_bill(){
-        $consumers = Concessionaire::with('rate','cashierbill')
+    public function search_bill(Request $request){
+        $q = $request->input('q');
+        //dd($q);
+        $consumers = Concessionaire::where('first_name', 'LIKE', '%'.$q.'%')
+        ->orWhere('last_name', 'LIKE', '%'.$q.'%')
+        ->with('rate','cashierbill')
         ->get();
         $dataConcessionaire = Concessionaire::where('status', '=', 'connected')->count();
         $dataConcessionaireAll = Concessionaire::count();
@@ -97,7 +101,7 @@ class CollectorController extends Controller
         ->orWhere('middle_name', 'LIKE', '%'.$q.'%')
         ->paginate(50);;
         //dd($dataUsers);                
-        return view('collector.search',compact('consumers'));
+        return view('collector.consumers',compact('consumers'));
     }
     public function payment($id)
     {

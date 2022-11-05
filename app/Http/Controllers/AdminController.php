@@ -29,13 +29,17 @@ class AdminController extends Controller
         //     $name = Auth::user()->name;
         // }
         // dd($name);
+        $dataSetting = Setting::first();
+        $duedate = $dataSetting->duedate;
+        $disconnection = $duedate + $dataSetting->days;
+        $disconnection_date = time() + ($disconnection * 24 * 60 * 60);
         $dataBill = Monthlybill::where('status', 'unpaid')
         ->where('billAmount', '!=', 0)
-        ->where('monthlyDueDate', '<=', date('Y-m-d'))
+        ->where('monthlyDueDate', '<=', date("Y-m-d", $disconnection_date))
         ->with('concessionaire')
         ->get();
         $dataBill = $dataBill->groupBy('meternum');
-        //dd($dataBill);
+        //dd($dataBill->count());
         $dataConcessionaire = Concessionaire::where('status', '=', 'connected')->count();
         $dataApplicant = Concessionaire::where('status', '=', 'pending')->count();
         $dataConcessionaireAll = Concessionaire::where('status', '!=', 'pending')->count();
@@ -53,6 +57,26 @@ class AdminController extends Controller
         }
 
         return view('admin.home', compact('dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'dataApplicant', 'dataBill'));
+    }
+    public function bills(){
+        $consumers = Concessionaire::with('rate','cashierbill')
+        ->get();
+        $dataConcessionaire = Concessionaire::where('status', '=', 'connected')->count();
+        $dataConcessionaireAll = Concessionaire::count();
+        $dataConcessionairediscon = Concessionaire::where('status', '=', 'disconnected')->count();
+        $dataSetting = Setting::all();
+        $collectibles = Monthlybill::with('consumer_details.rate')->where('status','unpaid')->get();
+        //dd($collectibles);
+        $amount = 0;
+        foreach($collectibles as $dataCollectibles){
+            $amount= $amount + $dataCollectibles->billAmount;
+        }
+        $payments = Monthlybill::where('status','=',1)->get();
+        $paymentsamount = 0;
+        foreach($payments as $payment){
+            $paymentsamount= $paymentsamount + $payment->billAmount;
+        }
+        return view('admin.bills', compact('consumers','dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'collectibles'));
     }
     public function insert(){
         
@@ -212,7 +236,7 @@ class AdminController extends Controller
         
     }
     public function generatereport(Request $request){
-        $dataReport = Bill::where('datepaid', '>=', $request->from)
+        $dataReport = Bill::with('consumer_details')->where('datepaid', '>=', $request->from)
         ->where('datepaid', '<=', $request->to)
         ->get();
         return view('admin.reportresult', compact('dataReport'));

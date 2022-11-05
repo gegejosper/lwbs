@@ -6,56 +6,58 @@
                     <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-lg-6">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                        <i class="fa fa-bars"> </i> List for Disconnection
-                        </div>
-                        <div class="panel-body">
-                            <div class="box box-info">
-                                
-                                <table class="table table-hover" id="table">
-                                    <tbody><tr>
-                                        <th>Bill Number</th>
-                                        <th>Meter Number</th>
-                                        <th>Concessionaire</th>
-                                        <th>Due Date</th>
-                                        <th>Purok</th>
-                                        <th>Action</th>
-                                        
-                                    </tr>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                    <i class="fa fa-bars"> </i> List for Disconnection
+                    </div>
+                    <div class="panel-body">
+                        <div class="box box-info">
+                            
+                            <table class="table table-hover" id="table">
+                                <tbody><tr>
+                                   
+                                    <th>Meter Number</th>
+                                    <th>Consumer</th>
+                                    <th>Due Date</th>
+                                    <th>Purok</th>
+                                    <th>Action</th>
                                     
-                                    @forelse($dataBill as $Bill)
-                                    <tr class="item{{$Bill[0]->id}}">
-                                    <td>{{$Bill[0]->monthlyBillDate}}-{{$Bill[0]->id}}</td>
+                                </tr>
+                                
+                                @forelse($dataBill as $Bill)
+                                @php 
+                                $for_disconnection = 0;
+                                @endphp
+                                @if($Bill[0]->concessionaire->status != 'disconnected')
+                                @php 
+                                $for_disconnection += 1;
+                                @endphp
+                                <tr class="item{{$Bill[0]->id}}">
+                                   
                                     <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->meternum}}</a></td>
                                     <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->concessionaire->last_name}}, {{$Bill[0]->concessionaire->first_name}}</a></td>
                                     <td>{{$Bill[0]->monthlyDueDate}}</td>
                                     <td>{{$Bill[0]->concessionaire->purok}}</td>
                                     <td>
-                                        @if($Bill[0]->concessionaire->status == 'disconnected')
-                                            <em>disconnected</em>    
-                                        
-                                        @else
-                                            <a href="/admin/disconnect/{{$Bill[0]->meternum}}" class="btn btn-danger btn-flat">Disconnect</a>
-                                        @endif
+                                        <a href="/admin/disconnect/{{$Bill[0]->meternum}}" class="btn btn-danger btn-flat">Disconnect</a>
                                     </td>
-                                    
-                                    </tr>
-                                    @empty
-                                    <tr><td colspan="6">No Data</td></tr>
-                                    @endforelse
-                                    
-                                    </tbody>
-                                </table>
-                            </div> 
-                            
-                        </div>
+                                </tr>
+                                @endif
+                                @empty
+                                <tr><td colspan="6">No Data</td></tr>
+                                @endforelse
+                                
+                                </tbody>
+                            </table>
+                        </div> 
                         
                     </div>
+                    
+                </div>
             </div>
                 <!-- /.col-lg-4 -->
                 <div class="col-lg-3">
-                <div class="panel panel-primary">
+                    <div class="panel panel-primary">
                         <div class="panel-heading">
                         <i class="fa fa-dashboard"></i> Concessionaire Overview
                         </div>
@@ -94,6 +96,19 @@
                                         More info <i class="fa fa-arrow-circle-right"></i>
                                     </a>
                             </div>
+                            <div class="small-box bg-orange">
+                                <div class="inner">
+                                    <h3>
+                                    {{$for_disconnection}}
+                                    </h3>
+                                    <p>
+                                        For disconnection
+                                    </p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-alert-circled"></i>
+                                </div>
+                            </div>
                             <div class="small-box bg-red">
                                 <div class="inner">
                                     <h3>
@@ -112,7 +127,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <!-- /.col-lg-4 -->
                 <div class="col-lg-3">

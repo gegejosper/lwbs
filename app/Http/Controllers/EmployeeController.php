@@ -58,7 +58,7 @@ class EmployeeController extends Controller
         $data->usertype = $request->position;
         $data->meternum = '0000-00-0';
         $data->email = $request->email;
-        $data->usertype = $request->position;
+        $data->username = $request->username;
         $data->password = bcrypt($request->password);
         $data->save();
 

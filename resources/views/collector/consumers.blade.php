@@ -3,73 +3,74 @@
 @section('content')
  <section class="content">
     <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-10">
-                            <div class="row">       
-                                <div class="col-lg-8">
-                                    <div class="box box-primary">
-                                            <div class="box-header">
-                                                <h3 class="box-title">Consumers List</h3>
-                                            
-                                            </div><!-- /.box-header -->
-                                            <div class="col-lg-8 padding pull-right" style="margin-bottom:20px;">
-                                            <form method="get" action="/collector/search">
-                                            <div class="input-group input-group-sm">
-                                                
-                                                    <input type="text" class="form-control" placeholder="Search Concessionaire" name="q">
-                                                    <span class="input-group-btn">
-                                                        <button class="btn btn-info btn-flat" type="submit">Search</button>
-                                                    </span>
-                                                    {{ csrf_field() }}
-                                                
-                                            </div>
-                                            </form>
-                                            </div>
-                                            <div class="box-body table-responsive padding">
-                                                <table class="table table-hover" id="table">
-                                                    <tbody><tr>
-                                                        <th>Meter Number</th>
-                                                        <th>Name</th>
-                                                        <th>Purok</th>
-                                                        <th>Category</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                    @foreach($consumers as $consumer)
-
-                                
-                                                   
-                                                    <tr class="item{{$consumer->id}}">
-                                                    <td>{{$consumer->meternum}}</td>
-                                                        <td> <a class="name" href="consumers/{{$consumer->id}}">{{$consumer->last_name}}, {{$consumer->first_name}}</a> </td>
-                                                       <td>
-                                                       {{$consumer->purok}}             
-                                                       </td>
-                                                       <td>
-                                                       {{$consumer->rate->name}}   
-                                                                 
-                                                       </td>
-                                                      
-                                                        <td class="td-actions">        
-                                                            <a href="consumers/{{$consumer->id}}" class="btn btn-primary btn-flat" >View Account Record</a>
-                                                        </td>
-                                                       
-                                                        
-                                                        
-                                                    </tr>
-                                               
-                                                    @endforeach
-                                                    
-                                                    </tbody>
-                                                </table>
-                                            </div><!-- /.box-body -->
-                                        </div><!-- /.box -->
-                                
-                                </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">       
+                    <div class="col-lg-8">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                                <h3 class="box-title">Consumers List</h3>
+                            
+                            </div><!-- /.box-header -->
+                            <div class="col-lg-8 padding pull-right" style="margin-bottom:20px;">
+                                <form method="get" action="/collector/search">
+                                    <div class="input-group input-group-sm">
+                                    
+                                        <input type="text" class="form-control" placeholder="Search Concessionaire" name="q">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-info btn-flat" type="submit">Search</button>
+                                        </span>
+                                        {{ csrf_field() }}
+                                    
+                                    </div>
+                                </form>
                             </div>
-                        </div>
-                       
-                    <!-- /.row -->
+                            <div class="box-body table-responsive padding">
+                                <table class="table table-hover" id="table">
+                                    <tbody><tr>
+                                        <th>Meter Number</th>
+                                        <th>Name</th>
+                                        <th>Purok</th>
+                                        <th>Category</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    @foreach($consumers as $consumer)
+
+                
+                                    
+                                    <tr class="item{{$consumer->id}}">
+                                    <td>{{$consumer->meternum}}</td>
+                                        <td> <a class="name" href="consumers/{{$consumer->id}}">{{$consumer->last_name}}, {{$consumer->first_name}}</a> </td>
+                                        <td>
+                                        {{$consumer->purok}}             
+                                        </td>
+                                        <td>
+                                        {{$consumer->rate->name}}   
+                                                    
+                                        </td>
+                                        
+                                        <td class="td-actions">
+                                            <a href="/collector/payment/{{$consumer->id}}" class="edit-modal btn btn-info btn-flat" ><i class="fa fa-plus"></i></a><a href="/collector/consumers/{{$consumer->id}}" class="btn btn-primary btn-flat" ><i class="fa fa-search"></i></a>        
+                                            <!-- <a href="/collector/consumers/{{$consumer->id}}" class="btn btn-primary btn-flat" >View Account Record</a> -->
+                                        </td>
+                                        
+                                        
+                                        
+                                    </tr>
+                                
+                                    @endforeach
+                                    
+                                    </tbody>
+                                </table>
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                    
                     </div>
+                </div>
+            </div>
+            
+        <!-- /.row -->
+        </div>
 </section><!-- /.content -->
 <div id="myModal" class="modal fade" role="dialog">
   		<div class="modal-dialog">

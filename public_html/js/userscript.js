@@ -11,6 +11,7 @@ $(document).ready(function() {
           $('.form-horizontal').show();
           $('#fid').val($(this).data('id'));
           $('#fedit_name').val($(this).data('fname'));
+          $('#medit_username').val($(this).data('username'));
           $('#ledit_name').val($(this).data('lname'));
           $('#medit_name').val($(this).data('mname'));
           $('#edit_password').val($(this).data('password'));
@@ -46,6 +47,7 @@ $(document).ready(function() {
                     'fname': $('#fedit_name').val(),
                     'lname': $('#ledit_name').val(),
                     'mname': $('#medit_name').val(),
+                    'username': $('#medit_username').val(),
                     'password': $('#edit_password').val(),
                     'email': $('#edit_email').val(),
                     'position': $('select[name=editposition]').val()
