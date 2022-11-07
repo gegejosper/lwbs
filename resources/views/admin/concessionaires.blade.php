@@ -104,7 +104,7 @@
                                     <tr class="item{{$Consumer->id}}">
                                     <td>{{$Consumer->id}}</td>
                                     <td>{{$Consumer->meternum}}</td>
-                                        <td> <a class="name" href="admin/consumers/{{$Consumer->id}}">{{$Consumer->last_name}}, {{$Consumer->first_name}} {{$Consumer->middle_name}}</a> </td>
+                                        <td> <a class="name" href="/admin/consumer/{{$Consumer->id}}">{{$Consumer->last_name}}, {{$Consumer->first_name}} {{$Consumer->middle_name}}</a> </td>
                                         <td>{{$Consumer->purok}}</td>
                                         <td>{{$Consumer->rate->name}}</td>
                                         <td class="td-actions">

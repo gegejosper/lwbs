@@ -115,7 +115,21 @@ class ConcessionaireController extends Controller
         ->paginate(50);
         //dd($dataUser);
         $filtername = 'Disconnected';
-        return view('admin.concessionairefilter',compact('dataUser', 'dataRate', 'filtername'));
+        return view('admin.concessionairefilter',compact('dataUser','filtername'));
+        
+    }
+    public function consumers_list()
+    {
+        // $dataUser = User::where('usertype', '=', 'concessionaire')
+        //             ->with(['concessionaire' => function($query){
+        //                 $query->where('status', '=', 'connected'); 
+        //             }])
+        //             ->paginate(20);            
+        //dd($dataUser);
+        $dataUser = Concessionaire::with('user')->paginate(50);
+        //dd($dataUser);
+        $filtername = '';
+        return view('admin.concessionairefilter',compact('dataUser', 'filtername'));
         
     }
     public function applicantConcessionaire()

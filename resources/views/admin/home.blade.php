@@ -59,7 +59,7 @@
                 <div class="col-lg-3">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                        <i class="fa fa-dashboard"></i> Concessionaire Overview
+                        <i class="fa fa-dashboard"></i> Consumer's Overview
                         </div>
                       
                         <div class="panel-body">
@@ -75,7 +75,7 @@
                                     <div class="icon">
                                         <i class="ion ion-arrow-graph-up-right"></i>
                                     </div>
-                                    <a href="/admin/concessionaire" class="small-box-footer">
+                                    <a href="/admin/consumers" class="small-box-footer">
                                         More info <i class="fa fa-arrow-circle-right"></i>
                                     </a>
                             </div>
@@ -92,7 +92,7 @@
                                     <div class="icon">
                                         <i class="ion ion-stats-bars"></i>
                                     </div>
-                                    <a href="/admin/concessionaire/connected" class="small-box-footer">
+                                    <a href="/admin/consumer/connected" class="small-box-footer">
                                         More info <i class="fa fa-arrow-circle-right"></i>
                                     </a>
                             </div>
@@ -121,7 +121,7 @@
                                 <div class="icon">
                                     <i class="ion ion-alert-circled"></i>
                                 </div>
-                                <a href="/admin/concessionaire/disconnected" class="small-box-footer">
+                                <a href="/admin/consumer/disconnected" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>

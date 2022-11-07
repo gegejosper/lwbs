@@ -19,7 +19,7 @@
                                                         <th>Meter Number</th>
                                                         <th>Concessionaire</th>
                                                         <th>Due Date</th>
-                                                        <th>Clark</th>
+                                                        <th>Purok</th>
                                                         <th>Bill Amount</th>
                                                        
                                                     </tr>

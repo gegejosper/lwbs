@@ -9,24 +9,33 @@
                                 <div class="col-lg-8">
                                     <div class="box box-primary">
                                             <div class="box-header">
-                                                <h3 class="box-title">{{$filtername}} Concessionaires List</h3>
+                                                <h3 class="box-title">{{$filtername}} Consumer's List</h3>
                                                 
                                             </div><!-- /.box-header -->
                                             <div class="box-body table-responsive no-padding">
                                                 <table class="table table-hover" id="table">
                                                     <tbody><tr>
-                                                        <th>ID</th>
+                                                        <th>#</th>
                                                         <th>Meter Number</th>
                                                         <th>Name</th>
-                                                        <th>Clark</th>
+                                                        <th>Purok</th>
+                                                        <th>Status</th>
                                                     </tr>
+                                                    @php 
+                                                        $count = 1;
+                                                    @endphp 
                                                     @forelse($dataUser as $User)
                                                     <tr class="item{{$User->id}}">
-                                                    <td>{{$User->id}}</td>
+                                                    
+                                                    <td>{{$count}}</td>
                                                     <td>{{$User->meternum}}</td>
-                                                        <td> <a class="name" href="/admin/concessionaire/{{$User->user->id}}">{{$User->user->lname}}, {{$User->user->fname}} {{$User->user->mname}}</a> </td>     
-                                                    <td>{{$User->clark}}</td>
+                                                        <td> <a class="name" href="/admin/consumer/{{$User->id}}">{{$User->last_name}}, {{$User->first_name}} {{$User->middle_name}}</a> </td>     
+                                                    <td>{{$User->purok}}</td>
+                                                    <td>{{$User->status}}</td>
                                                     </tr>
+                                                    @php 
+                                                        $count += 1;
+                                                    @endphp 
                                                     @empty
                                                     <tr><td colspan="6">No Data</td></tr>
                                                     @endforelse

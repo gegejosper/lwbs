@@ -75,6 +75,7 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::post('/setting/notice', 'SettingsController@settingNotice')->name('settingnotice');
     Route::post('/setting/discount', 'SettingsController@settingDiscount')->name('settingdiscount');
     Route::get('/report', 'AdminController@report')->name('report');
+    Route::get('/report/consumers', 'AdminController@consumers_report')->name('consumers_report');
     Route::post('/report/generate', 'AdminController@generatereport')->name('generatereport');
     Route::get('/messages', 'AdminController@messages')->name('messages');
     Route::get('/reminders', 'AdminController@reminders')->name('reminders');
@@ -83,6 +84,7 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::post('/search', 'ConcessionaireController@searchConcessionaire')->name('searchConcessionairePost');
     Route::get('/search', 'ConcessionaireController@searchConcessionaire')->name('searchConcessionaire');
     Route::get('/consumer', 'ConcessionaireController@readconsumer')->name('consumer');
+    Route::get('/consumers', 'ConcessionaireController@consumers_list')->name('consumers_list');
     Route::get('/consumer/connected', 'ConcessionaireController@connectedConcessionaire')->name('connectedConcessionaire');
     Route::get('/consumer/disconnected', 'ConcessionaireController@disconnectedConcessionaire')->name('disconnectedConcessionaire');
     Route::get('/consumer/pending', 'ConcessionaireController@applicantConcessionaire')->name('applicantConcessionaire');

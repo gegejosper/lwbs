@@ -45,12 +45,12 @@ class AdminController extends Controller
         $dataConcessionaireAll = Concessionaire::where('status', '!=', 'pending')->count();
         $dataConcessionairediscon = Concessionaire::where('status', '=', 'disconnected')->count();
         $dataSetting = Setting::all();
-        $collectibles = Monthlybill::where('status','=',0)->get();
+        $collectibles = Monthlybill::where('status','unpaid')->get();
         $amount = 0;
         foreach($collectibles as $dataCollectibles){
             $amount= $amount + $dataCollectibles->billAmount;
         }
-        $payments = Monthlybill::where('status','=',1)->get();
+        $payments = Monthlybill::where('status','paid')->get();
         $paymentsamount = 0;
         foreach($payments as $payment){
             $paymentsamount= $paymentsamount + $payment->billAmount;
@@ -187,7 +187,7 @@ class AdminController extends Controller
 
     public function payments()
     {
-        $dataBill = Monthlybill::where('status', '=', 1)
+        $dataBill = Monthlybill::where('status', 'paid')
         ->with('concessionaire', 'user')
         ->get();
         //dd($dataBill);
@@ -226,7 +226,7 @@ class AdminController extends Controller
         foreach($collectibles as $dataCollectibles){
             $amount= $amount + $dataCollectibles->billAmount;
         }
-        $payments = Monthlybill::where('status','=',1)->get();
+        $payments = Monthlybill::where('status','paid')->get();
         $paymentsamount = 0;
         foreach($payments as $payment){
             $paymentsamount= $paymentsamount + $payment->billAmount;

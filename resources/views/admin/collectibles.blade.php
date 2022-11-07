@@ -4,9 +4,9 @@
  <section class="content">
     <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-10">
+                        <div class="col-lg-12">
                             <div class="row">
-                                <div class="col-lg-8">
+                                <div class="col-lg-12">
                                     <div class="box box-primary">
                                             <div class="box-header">
                                                 <h3 class="box-title">{{$headername}} List</h3>
@@ -17,20 +17,20 @@
                                                     <tbody><tr>
                                                         <th>Bill Number</th>
                                                         <th>Meter Number</th>
-                                                        <th>Concessionaire</th>
+                                                        <th>Consumer</th>
                                                         <th>Due Date</th>
-                                                        <th>Clark</th>
+                                                        <th>Purok</th>
                                                         <th>Bill Amount</th>
                                                        
                                                     </tr>
                                                     <?php $collectibles = 0; ?>
                                                     @forelse($dataBill as $Bill)
                                                     <tr class="item{{$Bill->id}}">
-                                                    <td>{{$Bill->id}}</td>
+                                                    <td>{{$Bill->monthlyBillDate}}-{{$Bill->id}}</td>
                                                     <td>{{$Bill->meternum}}</td>
-                                                    <td>{{$Bill->user->fname}}</td>
+                                                    <td>{{$Bill->concessionaire->last_name}},{{$Bill->concessionaire->first_name}}</td>
                                                     <td>{{$Bill->monthlyDueDate}}</td>
-                                                    <td>{{$Bill->concessionaire->clark}}</td>
+                                                    <td>{{$Bill->concessionaire->purok}}</td>
                                                     <td>{{number_format($Bill->billAmount,2) }}</td>
                                                     
                                                     </tr>
