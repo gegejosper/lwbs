@@ -50,7 +50,7 @@
                                         </td>
                                         
                                         <td class="td-actions">
-                                            <a href="/collector/payment/{{$consumer->id}}" class="edit-modal btn btn-info btn-flat" ><i class="fa fa-plus"></i></a><a href="/collector/consumer/{{$consumer->id}}" class="btn btn-primary btn-flat" ><i class="fa fa-search"></i></a>        
+                                            <a href="/collector/payment/{{$consumer->id}}" class="btn btn-info btn-flat" ><i class="fa fa-plus"></i></a><a href="/collector/consumer/{{$consumer->id}}" class="btn btn-primary btn-flat" ><i class="fa fa-search"></i></a>        
                                             <!-- <a href="/collector/consumers/{{$consumer->id}}" class="btn btn-primary btn-flat" >View Account Record</a> -->
                                         </td>
                                         
