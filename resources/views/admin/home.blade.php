@@ -23,15 +23,13 @@
                                     <th>Action</th>
                                     
                                 </tr>
-                                
-                                @forelse($dataBill as $Bill)
                                 @php 
                                 $for_disconnection = 0;
                                 @endphp
+                                @forelse($dataBill as $Bill)
+                                
                                 @if($Bill[0]->concessionaire->status != 'disconnected')
-                                @php 
-                                $for_disconnection += 1;
-                                @endphp
+                                
                                 <tr class="item{{$Bill[0]->id}}">
                                    
                                     <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->meternum}}</a></td>
@@ -42,6 +40,9 @@
                                         <a href="/admin/disconnect/{{$Bill[0]->meternum}}" class="btn btn-danger btn-flat">Disconnect</a>
                                     </td>
                                 </tr>
+                                @php 
+                                $for_disconnection += 1;
+                                @endphp
                                 @endif
                                 @empty
                                 <tr><td colspan="6">No Data</td></tr>
