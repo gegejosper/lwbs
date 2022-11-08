@@ -29,6 +29,7 @@ class MeterController extends Controller
 
     public function search_consumer(Request $request){
         $q = $request->input('q');
+        $user_type = Auth::user()->usertype;
         //return $query->where('name', 'LIKE', %search%);
         $data_consumers = Concessionaire::where('first_name', 'LIKE', '%'.$q.'%')
         ->orWhere('last_name', 'LIKE', '%'.$q.'%')
@@ -36,7 +37,7 @@ class MeterController extends Controller
         ->paginate(20);
         $data_consumers->appends(['q' => $q]);
         //dd($dataUser);                
-        return view('reader.reading',compact('data_consumers'));
+        return view('reader.reading',compact('data_consumers','user_type'));
     }
     public function report()
     {

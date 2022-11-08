@@ -70,7 +70,7 @@
                                             {{$dataConcessionaireAll}}
                                         </h3>
                                         <p>
-                                            Total Concessionaire
+                                            Total Consumers
                                         </p>
                                     </div>
                                     <div class="icon">

@@ -278,9 +278,10 @@ class ConcessionaireController extends Controller
 
     public function view_purok_consumers($purok)
     {
+        $user_type = Auth::user()->usertype;
         $data_consumers = Concessionaire::with('bill')->where('purok', '=', $purok)->paginate(10); 
         //dd($data_consumers);
-        return view('reader.reading',compact('data_consumers'));
+        return view('reader.reading',compact('data_consumers', 'user_type'));
     }
 
 /// Collector Controller ///
