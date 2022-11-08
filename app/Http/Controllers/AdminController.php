@@ -176,7 +176,7 @@ class AdminController extends Controller
 
     public function collectibles()
     {
-        $dataBill = Monthlybill::where('status', '=', 0)
+        $dataBill = Monthlybill::where('status', 'unpaid')
         ->where('billAmount', '!=', 0)
         ->with('concessionaire', 'user')
         ->get();
