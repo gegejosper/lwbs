@@ -22,7 +22,7 @@ class MeterController extends Controller
     }
     public function reading(){
         $user_type = Auth::user()->usertype;
-        $data_consumers = Concessionaire::with('user','rate','bill')->paginate(10);
+        $data_consumers = Concessionaire::where('status', 'connected')->with('user','rate','bill')->paginate(50);
         //dd($data_consumers);
         return view('reader.reading',compact('data_consumers', 'user_type'));
     }

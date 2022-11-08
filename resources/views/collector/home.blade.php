@@ -47,7 +47,7 @@
                                     </td>
                                     <td> {{number_format($collectible->billAmount,2)}}    </td>
                                     <td class="td-actions">
-                                        <a href="payment/{{$collectible->consumer_details->id}}" class="edit-modal btn btn-info btn-flat" ><i class="fa fa-plus"></i></a><a href="consumers/{{$collectible->consumer_details->id}}" class="edit-modal btn btn-primary btn-flat" ><i class="fa fa-search"></i></a>
+                                        <a href="payment/{{$collectible->consumer_details->id}}" class="edit-modal btn btn-info btn-flat" ><i class="fa fa-plus"></i></a><a href="consumer/{{$collectible->consumer_details->id}}" class="edit-modal btn btn-primary btn-flat" ><i class="fa fa-search"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
