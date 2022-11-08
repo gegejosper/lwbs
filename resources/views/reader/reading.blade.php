@@ -1,4 +1,12 @@
-@extends('reader.layouts.admin')
+@php 
+if($user_type =='admin'){
+    $layout ='admin';
+}else {
+    $layout ='reader';
+}
+@endphp
+
+@extends($layout.'.layouts.admin')
 
 @section('content')
  <section class="content">
@@ -120,6 +128,7 @@
                             <div class="col-sm-6">
                             <input type="hidden" class="form-control " name="bildid" id="bildid">
                                 <input type="hidden" class="form-control" name="meternum" id="hiddenmeternum">
+                                <input type="hidden" class="form-control" name="usertype" id="usertype" value="{{$layout}}">
                                 <input type="hidden" class="form-control mincub" name="mincub" id="mincub">
                                 <input type="hidden" class="form-control rate" name="rate" id="rate">
                                 <input type="hidden" class="form-control excessrate" name="excessrate" id="excessrate">

@@ -115,7 +115,12 @@ class CollectorController extends Controller
         $TempBills = Tempbill::with('monthly_bill')->get();                   
         //dd($TempBills);
         //echo count($Bills);
-        return view('collector.payment', compact('Rate', 'Bills', 'Account', 'TempBills', 'dataSetting'));
+
+        //$user_name = Auth::user()->lname.', '.Auth::user()->fname;
+        $user_type = Auth::user()->usertype;
+        //if($user_type)
+        //Log::notice($user_name.' record monthly bill for meter # '.$request->meternum);
+        return view('collector.payment', compact('Rate', 'Bills', 'Account', 'TempBills', 'dataSetting', 'user_type'));
 
     }
     public function success($id)
@@ -134,9 +139,10 @@ class CollectorController extends Controller
 
     public function view_reciept($payment_id)
     {
+        $user_type = Auth::user()->usertype;
         $Bill = Bill::with('consumer_details', 'user_details')->find($payment_id);
         //dd($Bill); 
-        return view('collector.reciept', compact('Bill'));
+        return view('collector.reciept', compact('Bill', 'user_type'));
     }
     public function addpay($id,$billid,$amount)
     {
@@ -149,12 +155,25 @@ class CollectorController extends Controller
                     
         //dd($data);
          //return view('cashier.payment', compact('Concessionaire', 'Rate', 'Bills', 'Account', 'TempBills'));
-         return redirect('/collector/payment/'.$id);
+         $user_type = Auth::user()->usertype;
+         if($user_type == 'admin'){
+            return redirect('/admin/payment/'.$id);
+         }else {
+            return redirect('/collector/payment/'.$id);
+         }
+         //return redirect('/collector/payment/'.$id);
     }
     public function removepay($id,$billid)
     {
         Tempbill::find($billid)->delete();
-        return redirect('/collector/payment/'.$id);
+        $user_type = Auth::user()->usertype;
+        if($user_type == 'admin'){
+            return redirect('/admin/payment/'.$id);
+        }else {
+            return redirect('/collector/payment/'.$id);
+        }
+        
+       
     }
     public function processpayment(Request $request)
     {
@@ -196,7 +215,13 @@ class CollectorController extends Controller
                     Tempbill::find($tempBill->id)->delete();
                 }
                 Log::notice($user_name.' process payment for OR #'.$request->officialReciept);
-                return redirect('/collector/view_reciept/'.$data->id);
+                $user_type = Auth::user()->usertype;
+                if($user_type == 'admin'){
+                    return redirect('/admin/view_reciept/'.$data->id);
+                }else {
+                    return redirect('/collector/view_reciept/'.$data->id);
+                }
+                //return redirect('/collector/view_reciept/'.$data->id);
                 //return view('cashier.successpayment', compact('Concessionaire', 'Rate', 'Bills', 'Account', 'TempBills', 'dataSetting'));
                 //return response()->json($data);
             }

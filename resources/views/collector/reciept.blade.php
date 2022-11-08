@@ -1,4 +1,12 @@
-@extends('collector.layouts.admin')
+@php 
+if($user_type =='admin'){
+    $layout ='admin';
+}else {
+    $layout ='collector';
+}
+@endphp
+
+@extends($layout.'.layouts.admin')
 
 @section('content')
 <section class="content invoice">                    

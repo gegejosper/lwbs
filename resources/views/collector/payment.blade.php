@@ -1,5 +1,13 @@
-@extends('collector.layouts.admin')
+@php 
+if($user_type =='admin'){
+    $layout ='admin';
+}else {
+    $layout ='collector';
+}
 
+@endphp
+
+@extends($layout.'.layouts.admin')
 @section('content')
 <section class="content invoice">                    
                     <!-- title row -->
@@ -113,7 +121,7 @@
                                         {{number_format($individual_penalty,2)}}
                                         </td>
                                         <td>{{number_format($TempBill->billAmount,2)}}</td>
-                                        <td><a href="/collector/payment/removepay/{{$Account->id}}/{{$TempBill->id}}" class="edit-modal btn btn-warning btn-flat" ><i class="fa fa-times"></i></a></td>
+                                        <td><a href="removepay/{{$Account->id}}/{{$TempBill->id}}" class="edit-modal btn btn-warning btn-flat" ><i class="fa fa-times"></i></a></td>
                                         <?php $tempamount = $tempamount + $TempBill->billAmount; ?>
                                     </tr> 
                                     
@@ -127,7 +135,7 @@
                         <div class="col-lg-4">
                            
                             <div class="table-responsive">
-                            <form class="form-horizontal" role="form" action="/collector/processpayment" method="post">
+                            <form class="form-horizontal" role="form" action="/{{$layout}}/processpayment" method="post">
                             {{ csrf_field() }}    
                             <table class="table">
                                 <tbody>

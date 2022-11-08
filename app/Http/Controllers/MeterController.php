@@ -20,11 +20,11 @@ class MeterController extends Controller
         $dataSetting = Setting::all();
         return view('reader.home', compact('dataSetting'));
     }
-    public function reading()
-    {
+    public function reading(){
+        $user_type = Auth::user()->usertype;
         $data_consumers = Concessionaire::with('user','rate','bill')->paginate(10);
         //dd($data_consumers);
-        return view('reader.reading',compact('data_consumers'));
+        return view('reader.reading',compact('data_consumers', 'user_type'));
     }
 
     public function search_consumer(Request $request){

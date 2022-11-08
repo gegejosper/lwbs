@@ -40,7 +40,7 @@
                                     
                                     <tr class="item{{$consumer->id}}">
                                     <td>{{$consumer->meternum}}</td>
-                                        <td> <a class="name" href="consumers/{{$consumer->id}}">{{$consumer->last_name}}, {{$consumer->first_name}}</a> </td>
+                                        <td> <a class="name" href="consumer/{{$consumer->id}}">{{$consumer->last_name}}, {{$consumer->first_name}}</a> </td>
                                         <td>
                                         {{$consumer->purok}}             
                                         </td>

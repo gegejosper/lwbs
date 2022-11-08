@@ -43,6 +43,11 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::get('/reading', 'AdminController@reading')->name('insert');
     Route::get('/collectibles', 'AdminController@collectibles')->name('collectibles');
     Route::get('/payments', 'AdminController@payments')->name('payments');
+    Route::get('/payment/{id}', 'CollectorController@payment')->name('adminpayment');
+    Route::get('/payment/pay/{id}/{billId}/{amount}', 'CollectorController@addpay')->name('admin_addpay');
+    Route::get('/payment/removepay/{id}/{billId}/', 'CollectorController@removepay')->name('admin_removepay');
+    Route::post('/processpayment', 'CollectorController@processpayment')->name('admin_processpayment');
+    Route::get('/view_reciept/{id}', 'CollectorController@view_reciept')->name('admin_view_reciept');
     Route::get('/employee', 'AdminController@employee')->name('employee');
     //Route::get('/concessionaire', 'AdminController@concessionaire')->name('concessionaire');
     Route::get('/applicants', 'ConcessionaireController@applicants')->name('applicants');
@@ -112,6 +117,7 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
 
     //Route::get('/dashboard', 'MeterController@index')->name('readerdashboard');
     Route::get('/reading', 'MeterController@reading')->name('reading');
+    Route::post('/concessionaires/recordbill', 'BillController@recordbill')->name('admin.recordbill');
     Route::get('/report', 'AdminController@report')->name('readerreport');
     Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('readerConcessionaires');
     Route::get('/concessionaires/{id}', 'ConcessionaireController@readerconcessionaire')->name('readerconcessionaire');
@@ -133,7 +139,7 @@ Route::group(['middleware' =>'cashierAuth', 'prefix' => 'collector'], function()
     Route::get('/payment/pay/{id}/{billId}/{amount}', 'CollectorController@addpay')->name('addpay');
     Route::get('/payment/removepay/{id}/{billId}/', 'CollectorController@removepay')->name('removepay');
     Route::get('/consumers', 'ConcessionaireController@cashier_consumers')->name('cashier_consumers');
-    Route::get('/consumers/{id}', 'ConcessionaireController@cashier_consumer')->name('cashier_consumer');
+    Route::get('/consumer/{id}', 'ConcessionaireController@cashier_consumer')->name('cashier_consumer');
 });
 Route::group(['middleware' =>'meterAuth', 'prefix' => 'reader'], function(){
 

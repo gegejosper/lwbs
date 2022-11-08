@@ -37,7 +37,7 @@
                             @foreach($collectibles as $collectible)
                                 <tr class="item{{$collectible->id}}">
                                     <td>{{$collectible->consumer_details->meternum}}</td>
-                                        <td> <a class="name" href="/admin/consumers/{{$collectible->consumer_details->id}}">{{$collectible->consumer_details->last_name}}, {{$collectible->consumer_details->first_name}}</a> </td>
+                                        <td> <a class="name" href="/admin/consumer/{{$collectible->consumer_details->id}}">{{$collectible->consumer_details->last_name}}, {{$collectible->consumer_details->first_name}}</a> </td>
                                     <td>
                                         {{$collectible->consumer_details->purok}}             
                                     </td>

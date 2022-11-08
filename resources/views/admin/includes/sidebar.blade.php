@@ -15,6 +15,11 @@
                             </a>
                         </li>
                         <li class="active">
+                            <a href="/admin/reading">
+                                <i class="fa fa-list"></i> <span>Reading</span>
+                            </a>
+                        </li>
+                        <li class="active">
                             <a href="/admin/consumer">
                                 <i class="fa fa-male"></i> <span>Consumers</span>
                             </a>

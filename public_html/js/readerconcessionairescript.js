@@ -70,7 +70,7 @@ $(document).ready(function() {
     $('.modal-footer').on('click', '.edit', function() {
         $.ajax({
             type: 'post',
-            url: '/reader/concessionaires/recordbill',
+            url: '/'+$('input[name=usertype]').val()+'/concessionaires/recordbill',
             data: {
             '_token': $('input[name=_token]').val(),
             'meternum': $("#hiddenmeternum").val(),

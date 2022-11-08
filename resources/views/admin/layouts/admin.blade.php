@@ -90,7 +90,7 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                    {{ ucfirst(collect(request()->segments())->last()) }}
+                    <!-- {{ ucfirst(collect(request()->segments())->last()) }} -->
                         <small>Control panel</small>
                     </h1>
                     <ol class="breadcrumb">
@@ -100,7 +100,7 @@
                         <li>
                         <i class="fa fa-home"></i>
                         <a href="{{route('home')}}">Home</a>
-                        @for($i = 1; $i <= count(Request::segments()); $i++)
+                        @for($i = 1; $i <= 2; $i++)
                         <li>
                         {{ ucfirst(Request::segment($i)) }}
                         <!-- @if($i < count(Request::segments()) & $i > 0)
