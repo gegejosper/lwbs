@@ -33,12 +33,19 @@ class AdminController extends Controller
         $duedate = $dataSetting->duedate;
         $disconnection = $duedate + $dataSetting->days;
         $disconnection_date = time() + ($disconnection * 24 * 60 * 60);
+        //dd(date("Y-m-d", $disconnection_date));
         $dataBill = Monthlybill::where('status', 'unpaid')
         ->where('billAmount', '!=', 0)
-        ->where('monthlyDueDate', '<=', date("Y-m-d", $disconnection_date))
+        ->where('disconnection', '<=', date("Y-m-d"))
         ->with('concessionaire')
         ->get();
         $dataBill = $dataBill->groupBy('meternum');
+        $due_bills = Monthlybill::where('status', 'unpaid')
+        ->where('billAmount', '!=', 0)
+        ->where('monthlyDueDate', '<=', date("Y-m-d"))
+        ->with('concessionaire')
+        ->get();
+        $due_bills = $due_bills->groupBy('meternum');
         //dd($dataBill->count());
         $dataConcessionaire = Concessionaire::where('status', '=', 'connected')->count();
         $dataApplicant = Concessionaire::where('status', '=', 'pending')->count();
@@ -56,7 +63,7 @@ class AdminController extends Controller
             $paymentsamount= $paymentsamount + $payment->billAmount;
         }
 
-        return view('admin.home', compact('dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'dataApplicant', 'dataBill'));
+        return view('admin.home', compact('dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'dataApplicant', 'dataBill', 'due_bills'));
     }
     public function bills(){
         $consumers = Concessionaire::with('rate','cashierbill')

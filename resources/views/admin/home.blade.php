@@ -8,7 +8,56 @@
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                    <i class="fa fa-bars"> </i> List for Disconnection
+                    <i class="fa fa-bars"> </i> List for Disconnection 
+                    </div>
+                    <div class="panel-body">
+                        <div class="box box-info">
+                            
+                            <table class="table table-hover" id="table">
+                                <tbody><tr>
+                                   
+                                    <th>Meter Number</th>
+                                    <th>Consumer</th>
+                                    <th>Disconnection Date</th>
+                                    <th>Purok</th>
+                                    <th>Action</th>
+                                    
+                                </tr>
+                                @php 
+                                $for_disconnection = 0;
+                                @endphp
+                                @forelse($dataBill as $Bill)
+                                
+                                @if($Bill[0]->concessionaire->status != 'disconnected')
+                                
+                                <tr class="item{{$Bill[0]->id}}">
+                                   
+                                    <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->meternum}}</a></td>
+                                    <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->concessionaire->last_name}}, {{$Bill[0]->concessionaire->first_name}}</a></td>
+                                    <td>{{$Bill[0]->disconnection}}</td>
+                                    <td>{{$Bill[0]->concessionaire->purok}}</td>
+                                    <td>
+                                        <a href="/admin/disconnect/{{$Bill[0]->meternum}}" class="btn btn-danger btn-flat">Disconnect</a>
+                                    </td>
+                                </tr>
+                                @php 
+                                $for_disconnection += 1;
+                                @endphp
+                                @endif
+                                @empty
+                                <tr><td colspan="6">No Data</td></tr>
+                                @endforelse
+                                
+                                </tbody>
+                            </table>
+                        </div> 
+                        
+                    </div>
+                    
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                    <i class="fa fa-bars"> </i> List for Due Date
                     </div>
                     <div class="panel-body">
                         <div class="box box-info">
@@ -26,18 +75,18 @@
                                 @php 
                                 $for_disconnection = 0;
                                 @endphp
-                                @forelse($dataBill as $Bill)
+                                @forelse($due_bills as $due_bill)
                                 
-                                @if($Bill[0]->concessionaire->status != 'disconnected')
+                                @if($due_bill[0]->concessionaire->status != 'disconnected')
                                 
-                                <tr class="item{{$Bill[0]->id}}">
+                                <tr class="item{{$due_bill[0]->id}}">
                                    
-                                    <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->meternum}}</a></td>
-                                    <td><a href="/admin/consumer/{{$Bill[0]->concessionaire->id}}">{{$Bill[0]->concessionaire->last_name}}, {{$Bill[0]->concessionaire->first_name}}</a></td>
-                                    <td>{{$Bill[0]->monthlyDueDate}}</td>
-                                    <td>{{$Bill[0]->concessionaire->purok}}</td>
+                                    <td><a href="/admin/consumer/{{$due_bill[0]->concessionaire->id}}">{{$due_bill[0]->meternum}}</a></td>
+                                    <td><a href="/admin/consumer/{{$due_bill[0]->concessionaire->id}}">{{$due_bill[0]->concessionaire->last_name}}, {{$due_bill[0]->concessionaire->first_name}}</a></td>
+                                    <td>{{$due_bill[0]->monthlyDueDate}}</td>
+                                    <td>{{$due_bill[0]->concessionaire->purok}}</td>
                                     <td>
-                                        <a href="/admin/disconnect/{{$Bill[0]->meternum}}" class="btn btn-danger btn-flat">Disconnect</a>
+                                        <a href="/admin/consumer/{{$due_bill[0]->concessionaire->id}}" class="btn btn-info btn-flat">View</a>
                                     </td>
                                 </tr>
                                 @php 
