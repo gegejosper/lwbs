@@ -42,10 +42,22 @@
                                 <i class="fa  fa-gears"></i> <span>Setting</span>
                             </a>
                         </li>
-                        <li class="active">
+                        <!-- <li class="active">
                             <a href="/admin/report">
                                 <i class="fa fa-folder-open-o"></i> <span>Report</span>
                             </a>
+                        </li> -->
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-folder-open-o"></i> <span>Reports</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/admin/report/payments"><i class="fa fa-angle-double-right"></i> Payments</a></li>
+                                <li><a href="/admin/report/collectibles"><i class="fa fa-angle-double-right"></i> Collectibles</a></li>
+                                <li><a href="/admin/report/consumers"><i class="fa fa-angle-double-right"></i> Consumers</a></li>
+                                <li><a href="/admin/report"><i class="fa fa-angle-double-right"></i> Summary</a></li>
+                            </ul>
                         </li>
                         <li class="active">
                             <a href="/admin/logs">
@@ -55,9 +67,9 @@
                         <li class="active">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" > <i class="fa fa-reply"></i> <span>Logout</span></a>
                            
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                           
                           
                         </li>

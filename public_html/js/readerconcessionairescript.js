@@ -3,7 +3,7 @@ $(document).ready(function() {
     // if($('#newrec').val() ===""){
     //     $(".submitBill").hide(); 
     // }
-    console.log('record', $('#newrec').val());
+    //console.log('record', $('#newrec').val());
                            
     // $(".submitBill").show();
 
@@ -17,7 +17,7 @@ $(document).ready(function() {
           $('.modal-title').text('Add Bill Record');
           $('.deleteContent').hide();
           $('.form-horizontal').show();
-          $('#bildid').val($(this).data('id'));
+          $('#billdid').val($(this).data('id'));
           let account =  $(this).data('lname') + ", " + $(this).data('fname') + " " + $(this).data('mname');
           //$('<span>'+ $(this).data('lname') + ", " + $(this).data('fname') + " " + $(this).data('mname') +'</span>').appendTo('#account');
           //$('<span>'+ $(this).data('meternum') + '</span>').appendTo('#meternum');
@@ -59,7 +59,7 @@ $(document).ready(function() {
             // console.log("Excess Payment"+ $excessCubic);  
         }
         let cubic =  $newrec - $prevrec;
-        (cubic <= 0) ? $("#submitBill").hide() : $("#submitBill").show();
+        (cubic < 0) ? $("#submitBill").hide() : $("#submitBill").show();
         $(".cubic").val(cubic);   
     }
     $(".key").keyup(function() {
@@ -92,6 +92,7 @@ $(document).ready(function() {
             $('#amount_rec').text(new Intl.NumberFormat().format(data.billAmount));
             $('#used_rec').text(data.cubicCount);
             $('#printBillModal').modal('show');
+            $('.item'+ $('#billdid').val()).remove();
         }
         });
     });

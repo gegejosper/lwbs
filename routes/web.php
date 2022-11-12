@@ -40,9 +40,10 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::get('/dashboard', 'AdminController@index')->name('dashboard');
     Route::get('/insert', 'AdminController@insert')->name('insert');
     Route::get('/bills', 'AdminController@bills')->name('bills');
+    Route::get('/viewbill/{bill_id}', 'AdminController@viewbill')->name('viewbill');
     Route::get('/reading', 'AdminController@reading')->name('insert');
-    Route::get('/collectibles', 'AdminController@collectibles')->name('collectibles');
-    Route::get('/payments', 'AdminController@payments')->name('payments');
+    //Route::get('/collectibles', 'AdminController@collectibles')->name('collectibles');
+    
     Route::get('/payment/{id}', 'CollectorController@payment')->name('adminpayment');
     Route::get('/payment/pay/{id}/{billId}/{amount}', 'CollectorController@addpay')->name('admin_addpay');
     Route::get('/payment/removepay/{id}/{billId}/', 'CollectorController@removepay')->name('admin_removepay');
@@ -89,9 +90,10 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::post('/search', 'ConcessionaireController@searchConcessionaire')->name('searchConcessionairePost');
     Route::get('/search', 'ConcessionaireController@searchConcessionaire')->name('searchConcessionaire');
     Route::get('/consumer', 'ConcessionaireController@readconsumer')->name('consumer');
-    Route::get('/consumers', 'ConcessionaireController@consumers_list')->name('consumers_list');
+    
     Route::get('/consumer/connected', 'ConcessionaireController@connectedConcessionaire')->name('connectedConcessionaire');
     Route::get('/consumer/disconnected', 'ConcessionaireController@disconnectedConcessionaire')->name('disconnectedConcessionaire');
+    
     Route::get('/consumer/pending', 'ConcessionaireController@applicantConcessionaire')->name('applicantConcessionaire');
     Route::get('/consumer/{id}', 'ConcessionaireController@admin_consumer')->name('admin_consumer');
     Route::get('/consumer/purok/{clark}', 'ConcessionaireController@viewClark')->name('viewClark');
@@ -99,10 +101,21 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::post('/consumer/editconsumer', 'ConcessionaireController@editconsumer')->name('editconsumer');
     Route::post('/consumer/deleteconsumer', 'ConcessionaireController@deleteconsumer')->name('deletecconsumer');
 
-    Route::get('/disconnect/{meternum}', 'ConcessionaireController@disconnect')->name('disconnect');
+    Route::post('/consumer/disconnect', 'ConcessionaireController@disconnect')->name('disconnect');
     Route::get('/reconnect/{meternum}', 'ConcessionaireController@reconnect')->name('reconnect');
     Route::get('/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
+    // Reports
+
+    Route::get('/report/consumers', 'ConcessionaireController@consumers_list')->name('consumers_list');
+    Route::get('/report/consumers/date_range', 'ConcessionaireController@consumers_list_date_range')->name('consumers_list_date_range');
+    Route::get('/report/consumers/purok/{purok}', 'ConcessionaireController@report_purok_consumers')->name('report_purok_consumers');
+    Route::get('/report/collectibles', 'AdminController@collectibles')->name('collectibles');
+    Route::get('/report/collectibles/date_range', 'AdminController@collectibles_date_range')->name('collectibles_date_range');
+    Route::get('/report/consumers/disconnection', 'AdminController@disconnection_list')->name('disconnection_list');
+    
+    Route::get('/report/payments', 'AdminController@payments')->name('payments');
+    Route::get('/report/payments/date_range', 'AdminController@payments_date_range')->name('payments_date_range');
     //Route::get('/dashboard', 'CashierController@index')->name('cashierdashboard');
     //Route::get('/search', 'CashierController@search')->name('search');
     //Route::get('/report', 'CashierController@report')->name('cashierreport');
@@ -117,6 +130,7 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
 
     //Route::get('/dashboard', 'MeterController@index')->name('readerdashboard');
     Route::get('/reading', 'MeterController@reading')->name('reading');
+    Route::get('/concessionaires/purok/{purok}', 'ConcessionaireController@view_purok_consumers')->name('admin_view_purok_consumers');
     Route::post('/concessionaires/recordbill', 'BillController@recordbill')->name('admin.recordbill');
     Route::get('/report', 'AdminController@report')->name('readerreport');
     Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('readerConcessionaires');

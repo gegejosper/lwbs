@@ -4,7 +4,36 @@
  <section class="content">
     <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-3 hidden-print noprint">
+                            <div class="panel panel-primary">
+                                <div class="panel-body">
+                                    <div class="box box-info">
+                                        <div class="box-header">
+                                            <i class="fa fa-envelope"></i>
+                                            <h3 class="box-title">Date Range</h3> 
+                                        </div>
+                                        <form action="/admin/report/payments/date_range" method="get">
+                                            {{ csrf_field() }}   
+                                            <div class="box-body">
+                                                    <div class="form-group">
+                                                    <label for="">From: </label>
+                                                        <input type="date" class="form-control" name="from" />
+                                                    </div>
+                                                    <div class="form-group">
+                                                    <label for="">To: </label>
+                                                        <input type="date" class="form-control" name="to"/>
+                                                    </div>
+                                            </div>
+                                            <div class="box-footer clearfix">
+                                                <button type="submit" class="pull-right btn btn-default" id="sendEmail">Generate Report <i class="fa fa-arrow-circle-right"></i></button>
+                                            </div>
+                                        </form>
+                                    </div> 
+                                    
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="box box-primary">

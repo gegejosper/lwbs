@@ -18,9 +18,11 @@ class Monthlybill extends Model
         return $this->belongsTo('App\Concessionaire', 'meternum', 'meternum');
     }
 
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo('App\User', 'meternum', 'meternum');
+    }
+    public function reader_detail(){
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
     public function temp_bill()
     {

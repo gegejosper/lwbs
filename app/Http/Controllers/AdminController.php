@@ -10,7 +10,6 @@ use App\Bill;
 use App\Monthlybill;
 use App\Concessionaire;
 use App\Position;
-
 use Validator;
 use Response;
 use Illuminate\Support\Facades\Input;
@@ -22,8 +21,7 @@ use Illuminate\Support\Facades\Log;
 class AdminController extends Controller
 {
     //
-    public function index()
-    {
+    public function index(){
         // if (Auth::check())
         // {
         //     $name = Auth::user()->name;
@@ -62,8 +60,34 @@ class AdminController extends Controller
         foreach($payments as $payment){
             $paymentsamount= $paymentsamount + $payment->billAmount;
         }
+        //CHART DATA    
+        $payment_count_per_month = [];
+        for($i = 1 ; $i <= 12; $i++){
+            $from_date = date("Y")."-".$i."-01";
+            $to_date = date("Y")."-".$i."-31";
+            $payments = Monthlybill::where('status','paid')
+                ->where('monthlyDueDate', '>=', $from_date)
+                ->where('monthlyDueDate', '<=', $to_date)
+                ->get()->sum('billAmount');
+            
+            array_push($payment_count_per_month, $payments);  
+        }
+        //dd($payment_count_per_month);
+        $collectibles_count_per_month = [];
+        for($i = 1 ; $i <= 12; $i++){
+            $from_date = date("Y")."-".$i."-01";
+            $to_date = date("Y")."-".$i."-31";
+            $collectibles = Monthlybill::where('status','unpaid')
+                ->where('monthlyDueDate', '>=', $from_date)
+                ->where('monthlyDueDate', '<=', $to_date)
+                ->get()->sum('billAmount');
+            //dd($payments);
+            array_push($collectibles_count_per_month, $collectibles);  
+        }
+    
+        //END CHART
 
-        return view('admin.home', compact('dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'dataApplicant', 'dataBill', 'due_bills'));
+        return view('admin.home', compact('dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'dataApplicant', 'dataBill', 'due_bills', 'collectibles_count_per_month', 'payment_count_per_month'));
     }
     public function bills(){
         $consumers = Concessionaire::with('rate','cashierbill')
@@ -84,6 +108,12 @@ class AdminController extends Controller
             $paymentsamount= $paymentsamount + $payment->billAmount;
         }
         return view('admin.bills', compact('consumers','dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'collectibles'));
+    }
+    public function viewbill($bill_id){
+        $user_type = Auth::user()->usertype;
+        $Bill = Monthlybill::with('consumer_details', 'reader_detail')->find($bill_id);
+        //dd($bill);
+        return view('reader.bill', compact('Bill', 'user_type'));
     }
     public function insert(){
         
@@ -176,33 +206,56 @@ class AdminController extends Controller
 
     }
     
-    public function login()
-    {
+    public function login(){
         return view('admin.login');
     }
 
-    public function collectibles()
-    {
+    public function collectibles(){
         $dataBill = Monthlybill::where('status', 'unpaid')
         ->where('billAmount', '!=', 0)
         ->with('concessionaire', 'user')
         ->get();
         $headername = 'Collectibles';
         //dd($dataBill);
-        return view('admin.collectibles', compact('dataBill', 'headername'));
+        return view('admin.report-collectibles', compact('dataBill', 'headername'));
+    }
+    public function collectibles_date_range(Request $req){
+        $dataBill = Monthlybill::where('status', 'unpaid')
+        ->where('billAmount', '!=', 0)
+        ->where('monthlyDueDate', '>=', $req->from)
+        ->where('monthlyDueDate', '<=', $req->to)
+        ->with('concessionaire', 'user')
+        ->get();
+        $headername = 'Collectibles';
+        //dd($dataBill);
+        return view('admin.report-collectibles', compact('dataBill', 'headername'));
     }
 
-    public function payments()
-    {
+    public function payments(){
         $dataBill = Monthlybill::where('status', 'paid')
         ->with('concessionaire', 'user')
         ->get();
-        //dd($dataBill);
         $headername = 'Payments';
-        //dd($dataBill);
-        return view('admin.collectibles', compact('dataBill', 'headername'));
+        return view('admin.report-payments', compact('dataBill', 'headername'));
     }
-
+    public function payments_date_range(Request $req){
+        $dataBill = Monthlybill::where('status', 'paid')
+        ->with('concessionaire', 'user')
+        ->where('updated_at', '>=', $req->from)
+        ->where('updated_at', '<=', $req->to)
+        ->get();
+        $headername = 'Payments';
+        return view('admin.report-payments', compact('dataBill', 'headername'));
+    }
+    public function disconnection_list(){
+        $dataBill = Monthlybill::where('status', 'unpaid')
+        ->where('billAmount', '!=', 0)
+        ->where('disconnection', '<=', date("Y-m-d"))
+        ->with('concessionaire')
+        ->get();
+        $dataBill = $dataBill->groupBy('meternum');  
+        return view('admin.report-disconnection', compact('dataBill'));
+    }
     public function employee (){
         $dataPosition = Position::all();
         $dataUser = User::where('usertype', '!=', 'concessionaire')

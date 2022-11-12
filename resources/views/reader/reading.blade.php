@@ -12,9 +12,31 @@ if($user_type =='admin'){
  <section class="content">
     <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-3">
+            <div class="panel panel-primary">
+                <div class="panel-body">
+                            
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        Consumers By Purok
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body text-left">
+                            <a href="/{{$user_type}}/concessionaires/purok/Lumboy" type="button" class="btn btn-info btn-sm">Lumboy</a>
+                            <a href="/{{$user_type}}/concessionaires/purok/San Antonio"  type="button" class="btn btn-info btn-sm">San Antonio</a>
+                            <a href="/{{$user_type}}/concessionaires/purok/Mangga" type="button" class="btn btn-info btn-sm">Mangga</a>
+                            <a href="/{{$user_type}}/concessionaires/purok/Madasigon" type="button" class="btn btn-info btn-sm">Madasigon</a>
+                            <a href="/{{$user_type}}/concessionaires/purok/Maharlika" type="button" class="btn btn-info btn-sm">Maharlika</a>
+                            <a href="/{{$user_type}}/concessionaires/purok/Masanayon" type="button" class="btn btn-info btn-sm">Masanayon</a>
+                        </div>
+                    <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
             <div class="row">       
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="box box-primary">
                             <div class="box-header">
                                 <h3 class="box-title">Consumers List</h3>
@@ -126,7 +148,7 @@ if($user_type =='admin'){
                                 <input type="text" class="form-control excesspayment" name="excesspayment" readonly="readonly">
                             </div>
                             <div class="col-sm-6">
-                            <input type="hidden" class="form-control " name="bildid" id="bildid">
+                                <input type="hidden" class="form-control " name="billdid" id="billdid">
                                 <input type="hidden" class="form-control" name="meternum" id="hiddenmeternum">
                                 <input type="hidden" class="form-control" name="usertype" id="usertype" value="{{$layout}}">
                                 <input type="hidden" class="form-control mincub" name="mincub" id="mincub">
@@ -164,13 +186,17 @@ if($user_type =='admin'){
         <div class="modal-content">
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" align="center">
+                        <img src="{{asset('assets/img/water.png')}}" class="img-responsive" style="width:60px; text-align:center;">
                         <h3 class="text-center">ROMARATE WATER BILLING SYSTEM</h3>
                         <table class="table text-left" style="width:220px;">
                             <tr>
                                 <td><b>Account:</b></td>
-                                <td> <p id="account_name"></p></td>
-                                
+                                <td> <p id="account_name"></p></td> 
+                            </tr>
+                            <tr>
+                                <td><b>Meter Number:</b></td>
+                                <td> <p id="meternum_bill"></p></td> 
                             </tr>
                             <tr>
                                 <td><b>Due Date:</b></td>
@@ -212,6 +238,9 @@ if($user_type =='admin'){
                 <div class="modal-footer no-print">
                     <button type="button print" class="btn" onclick="window.print();">
                         Print
+                    </button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">
+                        <span class='glyphicon glyphicon-remove'></span> Close
                     </button>
                 </div>
             </div>

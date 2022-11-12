@@ -11,6 +11,7 @@ use App\Category;
 use App\Concessionaire;
 use App\Monthlybill;
 use App\Setting;
+use App\Disconnection;
 use App\Bill;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
@@ -104,7 +105,7 @@ class ConcessionaireController extends Controller
         //dd($dataUser);
         $filtername = 'Connected';
         $dataRate = Rate::all();
-        return view('admin.concessionairefilter',compact('dataUser', 'dataRate', 'filtername'));
+        return view('admin.report-consumer',compact('dataUser', 'dataRate', 'filtername'));
         
     }
     public function disconnectedConcessionaire()
@@ -115,7 +116,7 @@ class ConcessionaireController extends Controller
         ->paginate(50);
         //dd($dataUser);
         $filtername = 'Disconnected';
-        return view('admin.concessionairefilter',compact('dataUser','filtername'));
+        return view('admin.report-consumer',compact('dataUser','filtername'));
         
     }
     public function consumers_list()
@@ -129,7 +130,7 @@ class ConcessionaireController extends Controller
         $dataUser = Concessionaire::with('user')->paginate(50);
         //dd($dataUser);
         $filtername = '';
-        return view('admin.concessionairefilter',compact('dataUser', 'filtername'));
+        return view('admin.report-consumer',compact('dataUser', 'filtername'));
         
     }
     public function applicantConcessionaire()
@@ -175,7 +176,7 @@ class ConcessionaireController extends Controller
         $dataUsers = Concessionaire::with('user')->where('clark', '=', $clark)->paginate(10); 
        
         //dd($Rate);
-        return view('admin.concessionairefilter',compact('dataUser', 'dataRate', 'filtername'));
+        return view('admin.report-consumer',compact('dataUser', 'dataRate', 'filtername'));
     }
 
     public function searchConcessionaire(Request $request){
@@ -212,16 +213,22 @@ class ConcessionaireController extends Controller
         return response()->json($updateConcessionaire);
     }
 
-    public function disconnect($meternum)
+    public function disconnect(Request $req)
     {
-        $getCon = Concessionaire::where('meternum', '=', $meternum)->first();
+        // $getCon = Concessionaire::where('meternum', '=', $meternum)->first();
+        $getCon = Concessionaire::find($req->consumer_id);
         
-        $updateConcessionaire = Concessionaire::find($getCon->id)
+        $updateConcessionaire = Concessionaire::find($req->consumer_id)
                     ->update(['status' => 'disconnected'
                     ]);
+        $disconnect = new Disconnection();
+        $disconnect->consumer_id = $req->consumer_id;
+        $disconnect->remarks = $req->reason; 
+        $disconnect->save();       
         $user_name = Auth::user()->lname.', '.Auth::user()->fname;
         Log::notice($user_name.' disconnect '.$getCon->last_name.', '.$getCon->first_name);
-        return redirect('/admin/consumer/'.$getCon->id);
+        //return redirect('/admin/consumer/'.$updateConcessionaire->id);
+        return response()->json();
     }
     public function reconnect($meternum)
     {
@@ -258,9 +265,6 @@ class ConcessionaireController extends Controller
     public function readerConcessionaires(Request $req)
     {
        
-        // $dataUser = Concessionaire::where('usertype', '=', 'concessionaire')
-        //             ->with('user')
-        //             ->get();
         $dataUsers = Concessionaire::with('rate','bill')
                                     ->paginate(10);
         //dd($dataUser);
@@ -276,12 +280,22 @@ class ConcessionaireController extends Controller
          return view('reader.concessionaire', compact('Concessionaire', 'Rate'));
     }
 
-    public function view_purok_consumers($purok)
-    {
+    public function view_purok_consumers($purok){
         $user_type = Auth::user()->usertype;
         $data_consumers = Concessionaire::with('bill')->where('purok', '=', $purok)->paginate(10); 
         //dd($data_consumers);
         return view('reader.reading',compact('data_consumers', 'user_type'));
+    }
+    public function report_purok_consumers($purok){
+        $filtername = $purok;
+        $dataUser = Concessionaire::where('purok', '=', $purok)->paginate(50); 
+        return view('admin.report-consumer',compact('dataUser', 'filtername'));
+    }
+    public function consumers_list_date_range(Request $req){
+        $filtername = $req->from.' - '.$req->to;
+        $dataUser = Concessionaire::where('created_at', '>=', $req->from)
+        ->where('created_at', '<=', $req->to)->paginate(50); 
+        return view('admin.report-consumer',compact('dataUser', 'filtername'));
     }
 
 /// Collector Controller ///
@@ -321,9 +335,9 @@ class ConcessionaireController extends Controller
         $Concessionaire = Concessionaire::with('rate')->find($id);
         $paymentHistory = Bill::where('consumerId','=',$id)->get();
         $billHistory = Monthlybill::where('meternum','=',$Concessionaire->meternum)->get();
-       
+        $disconnection_history = Disconnection::where('consumer_id', $id)->with('consumer_details')->latest()->get();
         $Account = Concessionaire::where('meternum', '=', $Concessionaire->meternum)->first(); 
         $Rate = Rate::find($Account->category);
-        return view('admin.consumer', compact('Concessionaire', 'Rate', 'billHistory', 'Account', 'paymentHistory'));
+        return view('admin.consumer', compact('Concessionaire', 'Rate', 'billHistory', 'Account', 'paymentHistory', 'disconnection_history'));
     }
 }

@@ -4,7 +4,6 @@ if($user_type =='admin'){
 }else {
     $layout ='collector';
 }
-
 @endphp
 
 @extends($layout.'.layouts.admin')
@@ -156,7 +155,7 @@ if($user_type =='admin'){
                                     </tr>
                                     <tr>
                                         <th style="width:50%">Cash Rendered:</th>
-                                        <td><input type="text" class="form-control cash_rendered" name="cash_rendered" id="cash_rendered"  minimum="<?php echo $totalAmount; ?>" required></td>
+                                        <td><input type="number" class="form-control cash_rendered" name="cash_rendered" id="cash_rendered"  minimum="<?php echo $totalAmount; ?>" required></td>
                                     </tr>
                                     <tr>
                                         <th style="width:50%">OR Number:</th>

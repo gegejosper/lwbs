@@ -14,8 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class BillController extends Controller
 {
-    public function recordbill(Request $request)
-    {
+    public function recordbill(Request $request){
         $rules = array(
                 'meternum' => 'required',
                 'newrec' => 'required',
@@ -53,6 +52,7 @@ class BillController extends Controller
                 $data->status ='unpaid';
                 $data->meternum = $request->meternum;
                 $data->disconnection = date("Y-m-d", $disconnection);
+                $data->user_id = Auth::user()->id;
                 $data->save();
                 return response()->json($data);
             }
@@ -68,6 +68,7 @@ class BillController extends Controller
                 $data->status ='unpaid';
                 $data->meternum = $request->meternum;
                 $data->disconnection = date("Y-m-d", $disconnection);
+                $data->user_id = Auth::user()->id;
                 $data->save();
                 return response()->json($data);
             }

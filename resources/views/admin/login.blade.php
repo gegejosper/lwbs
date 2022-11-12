@@ -10,7 +10,7 @@
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="{{ asset('css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
-
+        <link rel="shortcut icon" href="{{asset('assets/img/water.png')}}" type="image/x-icon">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -33,7 +33,8 @@
    
     <div class="form-box" id="login-box" align="center">
     
-        <!-- <img src="{{ asset('assets/img/hdlogo.png') }}" class="img-responsive" width="150" align="center" style="padding-bottom:50px;"> -->
+    <img src="{{asset('assets/img/water.png')}}" class="img-responsive" style="width:100px; text-align:center; margin-bottom:20px;">
+    
             <div class="header" style="font-size:25px;">[ Romarate Water Billing System ] <br /></div>
             <form action="{{ route('user.login') }}" method="post">
             {{ csrf_field() }}

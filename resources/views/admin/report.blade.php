@@ -56,7 +56,7 @@
                                 <div class="icon">
                                     <i class="ion ion-arrow-graph-up-right"></i>
                                 </div>
-                                <a href="/admin/consumers" class="small-box-footer">
+                                <a href="/admin/report/consumers" class="small-box-footer">
                                     More info <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                         </div>
@@ -115,7 +115,7 @@
                             <div class="icon">
                                 <i class="ion ion-social-usd"></i>
                             </div>
-                            <a href="/admin/collectibles" class="small-box-footer">
+                            <a href="/admin/report/collectibles" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>
@@ -132,7 +132,7 @@
                             <div class="icon">
                                 <i class="ion ion-social-usd-outline"></i>
                             </div>
-                            <a href="/admin/payments" class="small-box-footer">
+                            <a href="/admin/report/payments" class="small-box-footer">
                                 More info <i class="fa fa-arrow-circle-right"></i>
                             </a>
                         </div>  

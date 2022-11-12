@@ -11,3 +11,7 @@
     padding: 20px;
     margin: 10px 25px;
 }
+
+#printBillModal .table>thead>tr>th, #printBillModal .table>tbody>tr>th, #printBillModal .table>tfoot>tr>th, #printBillModal .table>thead>tr>td, #printBillModal .table>tbody>tr>td, #myModal .table>tfoot>tr>td {
+    padding: 4px;
+}
