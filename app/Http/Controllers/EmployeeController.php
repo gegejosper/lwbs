@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
-    public function addUser(Request $request)
-    {
+    public function addUser(Request $request){
         $rules = array(
                 'fname' => 'required',
                 'lname' => 'required',
@@ -41,6 +40,33 @@ class EmployeeController extends Controller
             $user_name = Auth::user()->lname.', '.Auth::user()->fname;
             Log::notice($user_name.' added new user to the system'.$request->lname.', '.$request->fname);
             return response()->json($data);
+        }
+    }
+    public function save_profile(Request $req){
+        $rules = array(
+            'fname' => 'required',
+            'lname' => 'required',
+            'mname' => 'required',
+            'username' => 'required',
+            'password' => 'required|string|min:6',
+        );
+        $validator = Validator::make($req->all(), $rules);
+        if ($validator->fails()) {
+            return Response::json(array(
+                    'errors' => $validator->getMessageBag()->toArray(),
+            ));
+        } else {
+            
+            $data = User::find($req->user_id);
+            $data->fname = $req->fname;
+            $data->mname = $req->mname;
+            $data->lname = $req->lname;
+            $data->username = $req->username;
+            $data->password = bcrypt($req->password);
+            $data->save();
+            $user_name = Auth::user()->lname.', '.Auth::user()->fname;
+            Log::notice($user_name.' updated his/her details');
+            return redirect()->back()->with('success','Profile successfully updated!'); 
         }
     }
     public function readUser(Request $req)

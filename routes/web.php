@@ -30,6 +30,7 @@ Route::get('/about', 'Controller@about')->name('about');
 Route::post('/applysuccess', 'ConsumerController@registerconcessionaire')->name('registerconcessionaire');
 Route::post('/error', 'ConsumerController@error')->name('error');
 Route::get('/apply', 'ConsumerController@apply')->name('apply');
+Route::post('/save/profile', 'EmployeeController@save_profile')->name('save_profile');
 
 Route::post('/admin/login', 'LoginController@userLogin')->name('user.login');
 // Route::post('/collector/login', 'LoginController@cashierLogin')->name('cashier.login');
@@ -40,6 +41,7 @@ Route::group(['middleware' =>'adminAuth', 'prefix' => 'admin'], function(){
     Route::get('/dashboard', 'AdminController@index')->name('dashboard');
     Route::get('/insert', 'AdminController@insert')->name('insert');
     Route::get('/bills', 'AdminController@bills')->name('bills');
+    Route::get('/bills/search', 'AdminController@bills_search')->name('bills_search');
     Route::get('/viewbill/{bill_id}', 'AdminController@viewbill')->name('viewbill');
     Route::get('/reading', 'AdminController@reading')->name('insert');
     //Route::get('/collectibles', 'AdminController@collectibles')->name('collectibles');
@@ -154,11 +156,13 @@ Route::group(['middleware' =>'cashierAuth', 'prefix' => 'collector'], function()
     Route::get('/payment/removepay/{id}/{billId}/', 'CollectorController@removepay')->name('removepay');
     Route::get('/consumers', 'ConcessionaireController@cashier_consumers')->name('cashier_consumers');
     Route::get('/consumer/{id}', 'ConcessionaireController@cashier_consumer')->name('cashier_consumer');
+    Route::get('/profile', 'CollectorController@profile')->name('collector.profile');
 });
 Route::group(['middleware' =>'meterAuth', 'prefix' => 'reader'], function(){
 
     Route::get('/dashboard', 'MeterController@index')->name('readerdashboard');
     Route::get('/reading', 'MeterController@reading')->name('reader.reading');
+    Route::get('/profile', 'MeterController@profile')->name('reader.profile');
     Route::post('/search_consumer', 'MeterController@search_consumer')->name('search_consumer');
     Route::get('/report', 'MeterController@report')->name('reader.report');
     Route::get('/concessionaires', 'ConcessionaireController@readerConcessionaires')->name('reader.Concessionaires');

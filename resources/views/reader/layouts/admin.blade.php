@@ -103,15 +103,15 @@
                         </li>
                         <li class="active">
                             <a href="/reader/reading">
-                                <i class="fa fa-male"></i> <span>Reading</span>
+                                <i class="fa fa-list"></i> <span>Reading</span>
                             </a>
                         </li>
-                        <!-- <li class="active">
-                            <a href="/reader/concessionaires">
-                                <i class="fa fa-male"></i> <span>Concessionaire</span>
+                        <li class="active">
+                            <a href="/reader/profile">
+                                <i class="fa fa-male"></i> <span>Profile</span>
                             </a>
                         </li>
-                         -->
+                        
                     
                        
                         <li class="active">

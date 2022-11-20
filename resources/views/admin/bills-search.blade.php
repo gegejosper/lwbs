@@ -34,22 +34,24 @@
                                 <th>Amount</th>
                                 <th>Action</th>
                             </tr>
-                            @foreach($collectibles as $collectible)
-                                <tr class="item{{$collectible->id}}">
-                                    <td>{{$collectible->consumer_details->meternum}}</td>
-                                        <td> <a class="name" href="/admin/consumer/{{$collectible->consumer_details->id}}">{{$collectible->consumer_details->last_name}}, {{$collectible->consumer_details->first_name}}</a> </td>
+                            @foreach($consumers as $consumer)
+                                @if($consumer->monthly_bill->status == 'unpaid')
+                                <tr class="item{{$consumer->id}}">
+                                    <td>{{$consumer->meternum}}</td>
+                                        <td> <a class="name" href="/admin/consumer/{{$consumer->id}}">{{$consumer->last_name}}, {{$consumer->first_name}}</a> </td>
                                     <td>
-                                        {{$collectible->consumer_details->purok}}             
+                                        {{$consumer->purok}}             
                                     </td>
                                    
                                     <td>
-                                        {{$collectible->consumer_details->rate->name}}             
+                                        {{$consumer->rate->name}}             
                                     </td>
-                                    <td> {{number_format($collectible->billAmount,2)}}    </td>
+                                    <td> {{number_format($consumer->monthly_bill->billAmount,2)}}    </td>
                                     <td class="td-actions">
-                                        <a href="/admin/payment/{{$collectible->consumer_details->id}}" class="edit-modal btn btn-info btn-flat" ><i class="fa fa-plus"></i></a><a href="/admin/consumer/{{$collectible->consumer_details->id}}" class="edit-modal btn btn-primary btn-flat" ><i class="fa fa-search"></i></a>
+                                        <a href="/admin/payment/{{$consumer->id}}" class="edit-modal btn btn-info btn-flat" ><i class="fa fa-plus"></i></a><a href="/admin/consumer/{{$consumer->id}}" class="edit-modal btn btn-primary btn-flat" ><i class="fa fa-search"></i></a>
                                     </td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

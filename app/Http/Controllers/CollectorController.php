@@ -23,6 +23,11 @@ class CollectorController extends Controller
     {
         return view('cashier.login');
     }
+    public function profile(){
+        $user_type = Auth::user()->usertype;
+        $user_details = Auth::user();
+        return view('profile', compact('user_type', 'user_details'));
+    }
     public function index(){
         $consumers = Concessionaire::with('rate','cashierbill')
         ->get();

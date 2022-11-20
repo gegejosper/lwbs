@@ -5,18 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Setting;
 use App\Concessionaire;
+use App\Position;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 
 class MeterController extends Controller
 {
-    public function login()
-    {
+    public function login(){
         return view('reader.login');
     }
-    public function index()
-    {
+    public function profile(){
+        $user_type = Auth::user()->usertype;
+        $user_details = Auth::user();
+        return view('profile', compact('user_type', 'user_details'));
+    }
+    public function index(){
         $dataSetting = Setting::all();
         return view('reader.home', compact('dataSetting'));
     }

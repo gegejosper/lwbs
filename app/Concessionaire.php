@@ -29,4 +29,8 @@ class Concessionaire extends Model
     {
         return $this->hasOne('App\Monthlybill', 'meternum', 'meternum')->latest();
     }
+    public function monthly_bill()
+    {
+        return $this->hasOne('App\Monthlybill', 'meternum', 'meternum')->latest();
+    }
 }

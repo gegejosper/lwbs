@@ -92,7 +92,11 @@
                                 <i class="fa fa-male"></i> <span>Consumers</span>
                             </a>
                         </li>
-                        
+                        <li class="active">
+                            <a href="/collector/profile">
+                                <i class="fa fa-user"></i> <span>Profile</span>
+                            </a>
+                        </li>
                     
                         <!-- <li class="active">
                             <a href="/collector/report">

@@ -109,6 +109,23 @@ class AdminController extends Controller
         }
         return view('admin.bills', compact('consumers','dataSetting', 'dataConcessionaire', 'dataConcessionairediscon', 'dataConcessionaireAll','amount','paymentsamount', 'collectibles'));
     }
+
+    public function bills_search(Request $request){
+        $q = $request->input('q');
+        $consumers = Concessionaire::where('first_name', 'LIKE', '%'.$q.'%')
+        ->orWhere('last_name', 'LIKE', '%'.$q.'%')
+        ->with('rate','monthly_bill')
+        ->get();
+
+        $collectibles = Monthlybill::with('consumer_details.rate')->where('status','unpaid')->get();
+        //dd($collectibles);
+        $amount = 0;
+        foreach($collectibles as $dataCollectibles){
+            $amount= $amount + $dataCollectibles->billAmount;
+        }
+        
+        return view('admin.bills-search', compact('consumers'));
+    }
     public function viewbill($bill_id){
         $user_type = Auth::user()->usertype;
         $Bill = Monthlybill::with('consumer_details', 'reader_detail')->find($bill_id);
