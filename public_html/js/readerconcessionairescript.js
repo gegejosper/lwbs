@@ -86,10 +86,19 @@ $(document).ready(function() {
             $('#meternum_bill').text($('#meternum').val());
             $('#due_date').text(data.monthlyDueDate);
             $('#disconnection').text(data.disconnection);
-            $('#period_covered').text(data.monthlyBillDate);
+            let split_year_month = data.monthlyBillDate.split('-');
+            let get_year = split_year_month[0];
+            let get_month = parseInt(split_year_month[1]) - 1;
+            //console.log(get_month);
+            //let month_date = new Date(get_year, get_month);
+            let firstDay = new Date(get_year, get_month, 1);
+            let lastDay = new Date(get_year, get_month + 1, 0);
+
+            $('#period_covered').text(`${data.monthlyBillDate}-${firstDay.getDate()} to ${data.monthlyBillDate}-${lastDay.getDate()}`);
             $('#present_rec').text(data.newrec);
             $('#previous_rec').text(data.prevrec);
             $('#amount_rec').text(new Intl.NumberFormat().format(data.billAmount));
+            $('#amount_rec_due').text(new Intl.NumberFormat().format(data.with_penalty));
             $('#used_rec').text(data.cubicCount);
             $('#printBillModal').modal('show');
             $('.item'+ $('#billdid').val()).remove();

@@ -78,17 +78,17 @@
                         <div class="box box-primary">
                             <div class="box-header">
                                 <h3 class="box-title">Consumer's List</h3>
-                                <!-- <div class="col-lg-4 push-right" style="float:right; margin-top:10px;">
+                                <div class="col-lg-4 push-right" style="float:right; margin-top:10px;">
                                     <form action="/admin/search" method="get">
                                         {{ csrf_field() }} 
                                         <div class="input-group">
-                                        <input type="text" name="q" placeholder="Seach Concessionaire" class="form-control">
+                                        <input type="text" name="q" placeholder="Seach Consumer" class="form-control">
                                             <span class="input-group-btn">
                                                 <button type="submit" class="btn btn-primary btn-flat">Search</button>
                                             </span>
                                         </div>
                                     </form>
-                                </div>  -->
+                                </div> 
                             </div><!-- /.box-header -->
                             <div class="box-body table-responsive no-padding">
                                 <table class="table table-hover" id="table">

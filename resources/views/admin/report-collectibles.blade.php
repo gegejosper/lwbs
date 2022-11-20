@@ -17,11 +17,11 @@
                                             <div class="box-body">
                                                     <div class="form-group">
                                                     <label for="">From: </label>
-                                                        <input type="date" class="form-control" name="from" />
+                                                        <input type="date" class="form-control" name="from" required/>
                                                     </div>
                                                     <div class="form-group">
                                                     <label for="">To: </label>
-                                                        <input type="date" class="form-control" name="to"/>
+                                                        <input type="date" class="form-control" name="to" required/>
                                                     </div>
                                             </div>
                                             <div class="box-footer clearfix">

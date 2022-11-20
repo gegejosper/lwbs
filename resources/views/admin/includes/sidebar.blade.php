@@ -53,7 +53,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/admin/report/payments"><i class="fa fa-angle-double-right"></i> Payments</a></li>
+                                <li><a href="/admin/report/payments"><i class="fa fa-angle-double-right"></i> Collections</a></li>
                                 <li><a href="/admin/report/collectibles"><i class="fa fa-angle-double-right"></i> Collectibles</a></li>
                                 <li><a href="/admin/report/consumers"><i class="fa fa-angle-double-right"></i> Consumers</a></li>
                                 <li><a href="/admin/report"><i class="fa fa-angle-double-right"></i> Summary</a></li>

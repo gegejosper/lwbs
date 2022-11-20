@@ -31,7 +31,7 @@ class BillController extends Controller
             $dataSetting = Setting::first();
             $duedate = $dataSetting->duedate;
             $disconnection = $duedate + $dataSetting->days;
-            
+            $penalty = $dataSetting->penalty;
             $finalDueDate = $nextWeek = time() + ($duedate * 24 * 60 * 60);
             $disconnection = time() + ($disconnection * 24 * 60 * 60);
             //dd($request);
@@ -40,6 +40,7 @@ class BillController extends Controller
                         ->first();
             $user_name = Auth::user()->lname.', '.Auth::user()->fname;
             Log::notice($user_name.' record monthly bill for meter # '.$request->meternum);
+            $with_penalty_amount = $penalty + $request->payment;
             if($dataMonth){
                 $data =  Monthlybill::find($dataMonth->id);
                 $data->cubicCount = $request->cubic;
@@ -54,6 +55,7 @@ class BillController extends Controller
                 $data->disconnection = date("Y-m-d", $disconnection);
                 $data->user_id = Auth::user()->id;
                 $data->save();
+                $data->with_penalty = $with_penalty_amount;
                 return response()->json($data);
             }
             else {
@@ -70,6 +72,7 @@ class BillController extends Controller
                 $data->disconnection = date("Y-m-d", $disconnection);
                 $data->user_id = Auth::user()->id;
                 $data->save();
+                $data->with_penalty = $with_penalty_amount;
                 return response()->json($data);
             }
         }

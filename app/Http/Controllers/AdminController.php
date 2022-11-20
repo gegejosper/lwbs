@@ -235,7 +235,7 @@ class AdminController extends Controller
         $dataBill = Monthlybill::where('status', 'paid')
         ->with('concessionaire', 'user')
         ->get();
-        $headername = 'Payments';
+        $headername = 'Collections';
         return view('admin.report-payments', compact('dataBill', 'headername'));
     }
     public function payments_date_range(Request $req){
@@ -244,7 +244,7 @@ class AdminController extends Controller
         ->where('updated_at', '>=', $req->from)
         ->where('updated_at', '<=', $req->to)
         ->get();
-        $headername = 'Payments';
+        $headername = 'Collections';
         return view('admin.report-payments', compact('dataBill', 'headername'));
     }
     public function disconnection_list(){

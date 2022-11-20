@@ -102,12 +102,8 @@
   				<div class="modal-body">
   					<form class="form-horizontal" role="form">
                       {{ csrf_field() }}
-  						<div class="form-group">
-  							<label class="control-label col-sm-2" for="id">ID:</label>
-  							<div class="col-sm-10">
-  								<input type="text" class="form-control" id="fid" disabled>
-  							</div>
-  						</div>
+                        <input type="hidden" class="form-control" id="fid" disabled>
+  						
   						<div class="form-group">
   							<label class="control-label col-sm-2" for="fedit_name" >First Name:</label>
   							<div class="col-sm-10">
@@ -153,7 +149,7 @@
                         <div class="form-group">
   							<label class="control-label col-sm-2" for="edit_password" >Password</label>
   							<div class="col-sm-10">
-  								<input type="text" class="form-control" id="edit_password" >
+  								<input type="password" class="form-control" id="edit_password" >
   							</div>
                         </div>
             

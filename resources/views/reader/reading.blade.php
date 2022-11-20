@@ -207,25 +207,34 @@ if($user_type =='admin'){
                                 <td><p id="disconnection"></p></td>
                             </tr>
                             <tr>
-                                <td colspan='2' style="text-align:center"><b>PERIOD COVERED:</b> <span id="period_covered"></span></td>
+                                <td colspan='2' style="text-align:center"><b>PERIOD COVERED:</b> <br><span id="period_covered"></span></td>
+                            </tr>
+                            <tr>
+                                <td><b>PREVIOUS:</b></td>
+                                <td><p id="previous_rec"></p></td> 
                             </tr>
                             <tr>
                                 <td><b>PRESENT:</b></td>
-                                <td><b>PREVIOUS:</b></td>
-                                
-                            </tr>
-                            <tr>
                                 <td><p id="present_rec"></p></td>
-                                <td><p id="previous_rec"></p></td>
-                                
                             </tr>
                             <tr>
-                                <td><b>USED:</b></td>
-                                <td><b>AMOUNT:</b></td>
-                            </tr>
-                            <tr>
+                                <td><b>USED:</b> </td>
                                 <td><p id="used_rec"></p></td>
-                                <td><p id="amount_rec"></p></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center"><b>AMOUNT:</b></td>
+                            </tr>
+                            <tr>
+                                <td ><b>On Due:</b></td>
+                                <td ><b>After Due:</b></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p> &#8369; <span id="amount_rec""></span></p>
+                                </td>
+                                <td>
+                                    <p>  &#8369; <span id="amount_rec_due""></span></p>
+                                </td>
                             </tr>
                         </table>
 
