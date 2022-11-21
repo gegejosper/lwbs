@@ -117,7 +117,7 @@ class CollectorController extends Controller
         $Bills = Monthlybill::with('temp_bill')->where('meternum', '=', $Account->meternum)
                             ->where('status', 'unpaid')
                             ->get();
-        $TempBills = Tempbill::with('monthly_bill')->get();                   
+        $TempBills = Tempbill::where('userId', $id)->with('monthly_bill')->get();                   
         //dd($TempBills);
         //echo count($Bills);
 
